@@ -1,5 +1,9 @@
 {
+	"name": "scripture-app-tools",
 	"devDependencies": {
 		"lerna": "^2.5.1"
-	}
+	},
+	"workspaces": [
+    "packages/*"
+  ]
 }
