@@ -18,8 +18,6 @@ var parse = function (filePath) {
         };
         books.forEach(function (book, index) {
             bibleObj.books[booksOrder[index]] = {
-                slug: booksOrder[index],
-                name: book.attributes.n,
                 chapters: []
             };
             bibleObj.books[booksOrder[index]].chapters = book.children.map(function (chapter) { return ({

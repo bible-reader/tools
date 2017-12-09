@@ -2,9 +2,7 @@ export interface IChapter {
     verses: string[];
 }
 export interface IBook {
-    slug: string;
-    name: string;
-    chapters: Array<IChapter>;
+    chapters: IChapter[];
 }
 export interface IBibleBooks {
     [key: string]: IBook;
