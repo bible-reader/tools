@@ -22,15 +22,13 @@ const parse: ParserFunc = (filePath: string) => {
 
     books.forEach((book, index) => {
       bibleObj.books[booksOrder[index]] = {
-        slug: booksOrder[index],
-        name: book.attributes.n,
         chapters: []
       };
-      bibleObj.books[
-        booksOrder[index]
-      ].chapters = book.children.map(chapter => ({
-        verses: chapter.children.map(verse => verse.content || "")
-      }));
+      bibleObj.books[booksOrder[index]].chapters = book.children.map(
+        chapter => ({
+          verses: chapter.children.map(verse => verse.content || "")
+        })
+      );
 
       // Stats: number of verses for each chapter
       bibleObj.stats[booksOrder[index]] = book.children.map(

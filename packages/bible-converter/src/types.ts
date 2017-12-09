@@ -3,9 +3,7 @@ export interface IChapter {
 }
 
 export interface IBook {
-  slug: string;
-  name: string;
-  chapters: Array<IChapter>;
+  chapters: IChapter[];
 }
 
 export interface IBibleBooks {
