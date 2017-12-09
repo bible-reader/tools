@@ -47,7 +47,7 @@
   "include": ["**/*.ts"],
   "exclude": [
     "**/*.test.ts",
-    "dist",
+    "lib",
     "node_modules",
     "typings/global",
     "typings/global.d.ts"
