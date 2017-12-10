@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import * as fs from "fs-promise";
 
 import parse from ".";
 
@@ -7,8 +8,11 @@ import { IBibleObject } from "../../types";
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {
     const testFilePath = "src/parsers/opensong/KJV_test_sample.xmm";
+    const name = testFilePath;
 
-    parse(testFilePath)
+    fs
+      .readFile(testFilePath, "utf8")
+      .then(data => parse(data, name))
       .then((bibleObj: IBibleObject) => {
         expect(bibleObj.name).to.equal(testFilePath);
 

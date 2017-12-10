@@ -20,4 +20,4 @@ export interface IBibleObject {
   stats: IBibleStats;
 }
 
-export type ParserFunc = (filePath: string) => Promise<IBibleObject>;
+export type ParserFunc = (filePath: string, name: string) => IBibleObject;
