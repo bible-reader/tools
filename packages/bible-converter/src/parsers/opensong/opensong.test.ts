@@ -27,6 +27,12 @@ describe("OpenSong Bible format parser", () => {
           "Thou shalt have no other gods before me."
         );
 
+        // Number of chapters in genesis
+        expect(bibleObj.stats.gen.length).to.equal(50);
+
+        // Number of verses in Gen. 1
+        expect(bibleObj.stats.gen[0]).to.equal(31);
+
         done();
       })
       .catch((err: Error) => {

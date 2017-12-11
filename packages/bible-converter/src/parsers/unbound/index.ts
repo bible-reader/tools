@@ -25,11 +25,12 @@ const parse: ParserFunc = (data: string, name: string) => {
       const verseNumber = parseInt(lineParts[2], 10);
       const verseText = lineParts[3];
 
-      // create book object if it does not exist
+      // create book object if it does not exist (in stats, too)
       if (bibleObj.books[booksOrder[bookNumber - 1]] === undefined) {
         bibleObj.books[booksOrder[bookNumber - 1]] = {
           chapters: []
         };
+        bibleObj.stats[booksOrder[bookNumber - 1]] = [];
       }
       const book = bibleObj.books[booksOrder[bookNumber - 1]];
 
@@ -43,6 +44,13 @@ const parse: ParserFunc = (data: string, name: string) => {
 
       chapter.verses[verseNumber - 1] = verseText;
     }
+  });
+
+  // Stats: number of verses for each chapter
+  Object.keys(bibleObj.stats).forEach(bookSlug => {
+    bibleObj.stats[bookSlug] = bibleObj.books[bookSlug].chapters.map(
+      chapter => chapter.verses.length
+    );
   });
 
   return bibleObj;

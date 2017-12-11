@@ -20,11 +20,12 @@ var parse = function (data, name) {
             var chapterNumber = parseInt(lineParts[1], 10);
             var verseNumber = parseInt(lineParts[2], 10);
             var verseText = lineParts[3];
-            // create book object if it does not exist
+            // create book object if it does not exist (in stats, too)
             if (bibleObj.books[booksOrder[bookNumber - 1]] === undefined) {
                 bibleObj.books[booksOrder[bookNumber - 1]] = {
                     chapters: []
                 };
+                bibleObj.stats[booksOrder[bookNumber - 1]] = [];
             }
             var book = bibleObj.books[booksOrder[bookNumber - 1]];
             // create chapter object if it does not exist
@@ -36,6 +37,10 @@ var parse = function (data, name) {
             var chapter = book.chapters[chapterNumber - 1];
             chapter.verses[verseNumber - 1] = verseText;
         }
+    });
+    // Stats: number of verses for each chapter
+    Object.keys(bibleObj.stats).forEach(function (bookSlug) {
+        bibleObj.stats[bookSlug] = bibleObj.books[bookSlug].chapters.map(function (chapter) { return chapter.verses.length; });
     });
     return bibleObj;
 };
