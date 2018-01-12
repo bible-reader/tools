@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import * as fs from "fs-promise";
 
 import parse from ".";
@@ -14,24 +13,24 @@ describe("Unbound Bible format parser", () => {
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, name))
       .then((bibleObj: IBibleObject) => {
-        expect(bibleObj.name).to.equal(testFilePath);
+        expect(bibleObj.name).toEqual(testFilePath);
 
         const books = bibleObj.books;
-        // expect(Object.keys(books).length).to.equal(5);
+        // expect(Object.keys(books).length).toEqual(5);
 
-        expect(books.gen.chapters[0].verses[0]).to.equal(
+        expect(books.gen.chapters[0].verses[0]).toEqual(
           "Na počátku stvořil Bůh nebe a zemi."
         );
 
-        expect(books.exo.chapters[19].verses[2]).to.equal(
+        expect(books.exo.chapters[19].verses[2]).toEqual(
           "Nebudeš míti bohů jiných přede mnou."
         );
 
         // Number of chapters in genesis
-        expect(bibleObj.stats.gen.length).to.equal(50);
+        expect(bibleObj.stats.gen.length).toEqual(50);
 
         // Number of verses in Gen. 1
-        expect(bibleObj.stats.gen[0]).to.equal(31);
+        expect(bibleObj.stats.gen[0]).toEqual(31);
 
         done();
       })

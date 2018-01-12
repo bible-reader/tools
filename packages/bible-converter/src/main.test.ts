@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import * as fs from "fs-promise";
 
 import parse from "./parsers/opensong";
@@ -16,7 +15,7 @@ describe("generate()", () => {
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, name))
       .then((bibleObj: IBibleObject) => {
-        expect(bibleObj.name).to.equal(testFilePath);
+        expect(bibleObj.name).toEqual(testFilePath);
         return generate(outputPath, bibleObj);
       })
       .then(() => {

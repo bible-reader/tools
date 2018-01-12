@@ -1,14 +1,13 @@
 {
   "name": "@scripture-app/bible-converter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test":
-      "mocha --require ts-node/register \"./src/**/*.test.ts\" --timeout=30000",
-    "test:watch": "npm run test --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": ["bible", "xml", "json", "opensong"],
   "author": "Pavel Struhar",
@@ -22,13 +21,23 @@
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
+    "@types/jest": "^22.0.1",
     "@types/mocha": "^2.2.41",
     "chai": "^4.0.2",
+    "jest": "^22.0.4",
     "mocha": "^3.0.1",
     "prettier": "^1.4.4",
+    "ts-jest": "^22.0.1",
     "ts-node": "^3.1.0",
     "tslint": "^5.4.3",
     "tslint-config-prettier": "^1.1.0",
     "typescript": "^2.3.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
