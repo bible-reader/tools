@@ -1,0 +1,16 @@
+{
+  "name": "@scripture-app/common",
+  "version": "0.2.2",
+  "description":
+    "Common data structures and types for scripture-app and its libraries.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -p tsconfig.build.json"
+  },
+  "author": "Pavel Struhar",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  }
+}
