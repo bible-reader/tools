@@ -1,10 +1,11 @@
 {
-	"name": "scripture-app-tools",
-	"private": true,
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	},
-	"workspaces": [
-    "packages/*"
-  ]
+  "name": "scripture-app-tools",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap"
+  },
+  "devDependencies": {
+    "lerna": "^2.7.0"
+  },
+  "workspaces": ["packages/*"]
 }
