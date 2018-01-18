@@ -40,6 +40,7 @@ const parse: ParserFunc = (data: string, name: string) => {
             return;
           case "text":
             textIndex = index - 1;
+            return;
           default:
             return;
         }

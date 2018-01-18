@@ -34,6 +34,7 @@ var parse = function (data, name) {
                         return;
                     case "text":
                         textIndex = index - 1;
+                        return;
                     default:
                         return;
                 }
