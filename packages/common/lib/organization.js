@@ -71,4 +71,4 @@ exports.default = {
         "rev"
     ]
 };
-//# sourceMappingURL=config.js.map
+//# sourceMappingURL=organization.js.map

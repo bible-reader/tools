@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@scripture-app/common");
-const { booksOrder, oneChapterBooks } = common_1.config;
+const { booksOrder, oneChapterBooks } = common_1.organization;
 function parsePassage(bookStats, bookNameShort, passageString) {
     const bookNumbers = {};
     let index = 1;

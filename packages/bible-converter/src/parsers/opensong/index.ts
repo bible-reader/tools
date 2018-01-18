@@ -1,10 +1,10 @@
 import parseFromXML = require("xml-parser");
 
-import { config } from "@scripture-app/common";
+import { organization } from "@scripture-app/common";
 
 import { ParserFunc, IBibleObject } from "../../types";
 
-const { booksOrder } = config;
+const { booksOrder } = organization;
 
 /**
  * param filePath {string} Path to file

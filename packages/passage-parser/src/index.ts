@@ -1,7 +1,7 @@
-import { config } from "@scripture-app/common";
+import { organization } from "@scripture-app/common";
 import { Passage, BookNumbers, BookStats } from "@scripture-app/common";
 
-const { booksOrder, oneChapterBooks } = config;
+const { booksOrder, oneChapterBooks } = organization;
 
 function parsePassage(
   bookStats: BookStats,

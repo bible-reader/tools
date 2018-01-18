@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = require("@scripture-app/common");
-var booksOrder = common_1.config.booksOrder;
+var booksOrder = common_1.organization.booksOrder;
 /**
  * param filePath {string} Path to file
  */

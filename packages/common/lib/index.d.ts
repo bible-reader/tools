@@ -1,6 +1,6 @@
 import * as types from "./types";
-import config from "./config";
+import organization from "./organization";
 export declare type BookNumbers = types.BookNumbers;
 export declare type BookStats = types.BookStats;
 export declare type Passage = types.Passage;
-export { config };
+export { organization };
