@@ -9,10 +9,16 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": ["bible", "xml", "json", "opensong"],
+  "keywords": [
+    "bible",
+    "xml",
+    "json",
+    "opensong"
+  ],
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
+    "@scripture-app/common": "^0.2.2",
     "@types/fs-promise": "^1.0.3",
     "@types/node": "^8.0.2",
     "@types/xml-parser": "^1.2.28",
@@ -34,6 +40,13 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

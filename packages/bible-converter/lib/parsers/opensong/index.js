@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var parseFromXML = require("xml-parser");
-var conf_1 = require("../../conf");
-var booksOrder = conf_1.default.booksOrder;
+var common_1 = require("@scripture-app/common");
+var booksOrder = common_1.config.booksOrder;
 /**
  * param filePath {string} Path to file
  */

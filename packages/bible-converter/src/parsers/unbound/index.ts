@@ -1,8 +1,8 @@
-import conf from "../../conf";
+import { config } from "@scripture-app/common";
 
 import { ParserFunc, IBibleObject } from "../../types";
 
-const { booksOrder } = conf;
+const { booksOrder } = config;
 
 /**
  * param filePath {string} Path to file
