@@ -5,16 +5,11 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "prepare": "tsc -p tsconfig.build.json",
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [
-    "bible",
-    "xml",
-    "json",
-    "opensong"
-  ],
+  "keywords": ["bible", "xml", "json", "opensong"],
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
@@ -40,13 +35,6 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }

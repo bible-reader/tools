@@ -1,28 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var parseFromXML = require("xml-parser");
-var common_1 = require("@scripture-app/common");
-var booksOrder = common_1.organization.booksOrder;
+const parseFromXML = require("xml-parser");
+const common_1 = require("@scripture-app/common");
+const { booksOrder } = common_1.organization;
 /**
  * param filePath {string} Path to file
  */
-var parse = function (data, name) {
-    var parsedXml = parseFromXML(data.toString());
-    var books = parsedXml.root.children;
-    var bibleObj = {
-        name: name,
+const parse = (data, name) => {
+    const parsedXml = parseFromXML(data.toString());
+    const books = parsedXml.root.children;
+    const bibleObj = {
+        name,
         books: {},
         stats: {}
     };
-    books.forEach(function (book, index) {
+    books.forEach((book, index) => {
         bibleObj.books[booksOrder[index]] = {
             chapters: []
         };
-        bibleObj.books[booksOrder[index]].chapters = book.children.map(function (chapter) { return ({
-            verses: chapter.children.map(function (verse) { return verse.content || ""; })
-        }); });
+        bibleObj.books[booksOrder[index]].chapters = book.children.map(chapter => ({
+            verses: chapter.children.map(verse => verse.content || "")
+        }));
         // Stats: number of verses for each chapter
-        bibleObj.stats[booksOrder[index]] = book.children.map(function (chapter) { return chapter.children.length; });
+        bibleObj.stats[booksOrder[index]] = book.children.map(chapter => chapter.children.length);
     });
     return bibleObj;
 };

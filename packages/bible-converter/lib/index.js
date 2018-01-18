@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getParser = function (format) {
+exports.getParser = (format) => {
     if (format) {
-        var parser = require("./parsers/" + format).default;
+        const parser = require(`./parsers/${format}`).default;
         return parser;
     }
     throw new Error("No format string supplied.");

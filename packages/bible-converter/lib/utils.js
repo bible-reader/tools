@@ -7,6 +7,6 @@ function pad(n, width, z) {
 }
 exports.pad = pad;
 exports.default = {
-    pad: pad
+    pad
 };
 //# sourceMappingURL=utils.js.map
