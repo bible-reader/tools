@@ -1,7 +1,7 @@
 export declare type BookNumbers = {
     [key: string]: number;
 };
-export declare type BookStats = {
+export declare type Versification = {
     [key: string]: Array<number>;
 };
 export declare type Passage = {

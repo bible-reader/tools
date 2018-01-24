@@ -1,10 +1,10 @@
 import { organization } from "@scripture-app/common";
-import { Passage, BookNumbers, BookStats } from "@scripture-app/common";
+import { Passage, BookNumbers, Versification } from "@scripture-app/common";
 
 const { booksOrder, oneChapterBooks } = organization;
 
 function parsePassage(
-  bookStats: BookStats,
+  v11n: Versification,
   bookNameShort: string,
   passageString: string
 ) {
@@ -67,7 +67,7 @@ function parsePassage(
           // works for multichapter passages, like Gen. 1-3
           passage.endChapter = parseInt(passageEndParts[0].trim());
           passage.endVerse =
-            bookStats[passage.bookNameShort][passage.endChapter - 1];
+            v11n[passage.bookNameShort][passage.endChapter - 1];
         }
       } else {
         passage.endChapter = passage.startChapter;
@@ -89,8 +89,7 @@ function parsePassage(
       passage.endVerse = passage.startVerse;
     } else {
       passage.endChapter = passage.startChapter;
-      passage.endVerse =
-        bookStats[passage.bookNameShort][passage.endChapter - 1];
+      passage.endVerse = v11n[passage.bookNameShort][passage.endChapter - 1];
     }
   }
 

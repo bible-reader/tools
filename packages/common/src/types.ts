@@ -2,7 +2,7 @@ export type BookNumbers = {
   [key: string]: number;
 };
 
-export type BookStats = {
+export type Versification = {
   [key: string]: Array<number>;
 };
 

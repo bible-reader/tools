@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@scripture-app/common");
 const { booksOrder, oneChapterBooks } = common_1.organization;
-function parsePassage(bookStats, bookNameShort, passageString) {
+function parsePassage(v11n, bookNameShort, passageString) {
     const bookNumbers = {};
     let index = 1;
     for (let bookShortName of booksOrder) {
@@ -58,7 +58,7 @@ function parsePassage(bookStats, bookNameShort, passageString) {
                     // works for multichapter passages, like Gen. 1-3
                     passage.endChapter = parseInt(passageEndParts[0].trim());
                     passage.endVerse =
-                        bookStats[passage.bookNameShort][passage.endChapter - 1];
+                        v11n[passage.bookNameShort][passage.endChapter - 1];
                 }
             }
             else {
@@ -84,8 +84,7 @@ function parsePassage(bookStats, bookNameShort, passageString) {
         }
         else {
             passage.endChapter = passage.startChapter;
-            passage.endVerse =
-                bookStats[passage.bookNameShort][passage.endChapter - 1];
+            passage.endVerse = v11n[passage.bookNameShort][passage.endChapter - 1];
         }
     }
     return passage;

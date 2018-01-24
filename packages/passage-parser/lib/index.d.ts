@@ -1,5 +1,5 @@
-import { BookStats } from "@scripture-app/common";
-declare function parsePassage(bookStats: BookStats, bookNameShort: string, passageString: string): {
+import { Versification } from "@scripture-app/common";
+declare function parsePassage(v11n: Versification, bookNameShort: string, passageString: string): {
     bookNameShort: string;
     bookNumber: number;
     startChapter: number;
