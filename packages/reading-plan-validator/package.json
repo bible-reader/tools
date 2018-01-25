@@ -1,0 +1,37 @@
+{
+  "name": "@scripture-app/reading-plan-validator",
+  "version": "0.2.0",
+  "description": "Script validating reading plans for Scripture App",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scripture",
+    "bible",
+    "reading",
+    "plan",
+    "validation",
+    "validator"
+  ],
+  "author": "Pavel Struhar",
+  "license": "MIT",
+  "dependencies": {
+    "@scripture-app/common": "^0.2.2",
+    "@scripture-app/passage-parser": "^0.2.2",
+    "@types/mz": "^0.0.32",
+    "@types/node": "^8.0.47",
+    "mz": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.1",
+    "jest": "^22.0.4",
+    "prettier": "^1.7.4",
+    "ts-jest": "^22.0.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.6.0",
+    "typescript": "^2.6.1"
+  }
+}
