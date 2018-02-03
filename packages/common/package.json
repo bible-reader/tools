@@ -1,8 +1,7 @@
 {
   "name": "@scripture-app/common",
-  "version": "0.2.2",
-  "description":
-    "Common data structures and types for scripture-app and its libraries.",
+  "version": "0.3.0",
+  "description": "Common data structures and types for scripture-app and its libraries.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
