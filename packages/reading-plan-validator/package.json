@@ -17,6 +17,9 @@
     "validation",
     "validator"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {

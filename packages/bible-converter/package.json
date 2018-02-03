@@ -9,6 +9,9 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "publishConfig": {
+    "access": "public"
+  },  
   "keywords": [
     "bible",
     "xml",

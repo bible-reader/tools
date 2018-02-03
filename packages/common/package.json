@@ -7,6 +7,9 @@
   "scripts": {
     "prepare": "tsc -p tsconfig.build.json"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Pavel Struhar",
   "license": "MIT",
   "devDependencies": {
