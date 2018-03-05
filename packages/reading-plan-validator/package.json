@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/reading-plan-validator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Script validating reading plans for Scripture App",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -23,8 +23,8 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@scripture-app/common": "^0.3.0",
-    "@scripture-app/passage-parser": "^0.3.0",
+    "@scripture-app/common": "^0.3.1",
+    "@scripture-app/passage-parser": "^0.3.1",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
     "mz": "^2.7.0"
