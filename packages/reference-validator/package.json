@@ -1,0 +1,39 @@
+{
+  "name": "@scripture-app/reference-validator",
+  "version": "0.3.1",
+  "description": "Validator for Bible coordinates.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -p tsconfig.build.json",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": ["bible", "reference", "validator"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Pavel Struhar",
+  "license": "MIT",
+  "dependencies": {
+    "@scripture-app/common": "^0.3.1",
+    "@types/node": "^8.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.1",
+    "jest": "^22.0.4",
+    "prettier": "^1.4.4",
+    "ts-jest": "^22.0.1",
+    "ts-node": "^3.1.0",
+    "tslint": "^5.4.3",
+    "tslint-config-prettier": "^1.1.0",
+    "typescript": "^2.3.4"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+  }
+}

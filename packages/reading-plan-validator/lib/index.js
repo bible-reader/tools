@@ -35,10 +35,11 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
             error.isError = true;
             error.message += "The chapter does not exist. ";
         }
+        // pro-active swapping of chapter and verse numbers in case the starting > the ending
         if (passage.startChapter <= passage.endChapter) {
             if (passage.startVerse > passage.endVerse) {
                 error.isError = true;
-                error.message += "End chapter lesser than starting chapter - swapped. ";
+                error.message += "End verse lesser than starting verse - swapped. ";
                 const sw = passage.endVerse;
                 passage.endVerse = passage.startVerse;
                 passage.startVerse = sw;
