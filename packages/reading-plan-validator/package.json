@@ -25,6 +25,7 @@
   "dependencies": {
     "@scripture-app/common": "^0.3.1",
     "@scripture-app/passage-parser": "^0.3.1",
+    "@scripture-app/reference-validator": "^0.3.1",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
     "mz": "^2.7.0"

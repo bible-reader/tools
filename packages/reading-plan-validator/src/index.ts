@@ -1,4 +1,5 @@
 import { Versification, Passage } from "@scripture-app/common";
+import { chapterExists, verseExists } from "@scripture-app/reference-validator";
 
 type Error = {
   passageIndex: number;
@@ -23,10 +24,16 @@ function validateReadingPlan(
     };
 
     // checking verses
-    if (versification[passage.bookNameShort][passage.startChapter - 1]) {
+    if (
+      chapterExists(versification, passage.bookNameShort, passage.startChapter)
+    ) {
       if (
-        passage.startVerse >
-        versification[passage.bookNameShort][passage.startChapter - 1]
+        !verseExists(
+          versification,
+          passage.bookNameShort,
+          passage.startChapter,
+          passage.startVerse
+        )
       ) {
         error.isError = true;
         error.message +=
@@ -38,10 +45,16 @@ function validateReadingPlan(
     }
 
     // ending verse check
-    if (versification[passage.bookNameShort][passage.endChapter - 1]) {
+    if (
+      chapterExists(versification, passage.bookNameShort, passage.endChapter)
+    ) {
       if (
-        passage.endVerse >
-        versification[passage.bookNameShort][passage.endChapter - 1]
+        !verseExists(
+          versification,
+          passage.bookNameShort,
+          passage.endChapter,
+          passage.endVerse
+        )
       ) {
         error.isError = true;
         error.message +=

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const reference_validator_1 = require("@scripture-app/reference-validator");
 function validateReadingPlan(passages, versification, checkContinuity = true) {
     const errors = [];
     let i = 0;
@@ -10,9 +11,8 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
             message: ""
         };
         // checking verses
-        if (versification[passage.bookNameShort][passage.startChapter - 1]) {
-            if (passage.startVerse >
-                versification[passage.bookNameShort][passage.startChapter - 1]) {
+        if (reference_validator_1.chapterExists(versification, passage.bookNameShort, passage.startChapter)) {
+            if (!reference_validator_1.verseExists(versification, passage.bookNameShort, passage.startChapter, passage.startVerse)) {
                 error.isError = true;
                 error.message +=
                     "The starting verse number exceeds the number of verses in the chapter. ";
@@ -23,9 +23,8 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
             error.message += "The chapter does not exist. ";
         }
         // ending verse check
-        if (versification[passage.bookNameShort][passage.endChapter - 1]) {
-            if (passage.endVerse >
-                versification[passage.bookNameShort][passage.endChapter - 1]) {
+        if (reference_validator_1.chapterExists(versification, passage.bookNameShort, passage.endChapter)) {
+            if (!reference_validator_1.verseExists(versification, passage.bookNameShort, passage.endChapter, passage.endVerse)) {
                 error.isError = true;
                 error.message +=
                     "The ending verse number exceeds the number of verses in the chapter. ";
