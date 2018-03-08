@@ -7,12 +7,12 @@ export interface IBook {
 export interface IBibleBooks {
     [key: string]: IBook;
 }
-export interface IBibleStats {
+export interface IBibleVersification {
     [key: string]: number[];
 }
 export interface IBibleObject {
     name: string;
     books: IBibleBooks;
-    stats: IBibleStats;
+    v11n: IBibleVersification;
 }
 export declare type ParserFunc = (filePath: string, name: string) => IBibleObject;

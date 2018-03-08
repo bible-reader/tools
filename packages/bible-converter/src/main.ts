@@ -51,9 +51,9 @@ export const splitByChapters = async (
     }
   }
   try {
-    fs.writeFile(`${outputPath}/stats.json`, JSON.stringify(bibleObj.stats));
+    fs.writeFile(`${outputPath}/v11n.json`, JSON.stringify(bibleObj.v11n));
   } catch (err) {
-    console.error("Error writing stats file: ", err);
+    console.error("Error writing v11n file: ", err);
   }
 };
 

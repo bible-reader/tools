@@ -27,10 +27,10 @@ describe("Unbound Bible format parser", () => {
         );
 
         // Number of chapters in genesis
-        expect(bibleObj.stats.gen.length).toEqual(50);
+        expect(bibleObj.v11n.gen.length).toEqual(50);
 
         // Number of verses in Gen. 1
-        expect(bibleObj.stats.gen[0]).toEqual(31);
+        expect(bibleObj.v11n.gen[0]).toEqual(31);
 
         done();
       })

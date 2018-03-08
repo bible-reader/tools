@@ -12,7 +12,7 @@ const parse = (data, name) => {
     const bibleObj = {
         name,
         books: {},
-        stats: {}
+        v11n: {}
     };
     books.forEach((book, index) => {
         bibleObj.books[booksOrder[index]] = {
@@ -21,8 +21,8 @@ const parse = (data, name) => {
         bibleObj.books[booksOrder[index]].chapters = book.children.map(chapter => ({
             verses: chapter.children.map(verse => verse.content || "")
         }));
-        // Stats: number of verses for each chapter
-        bibleObj.stats[booksOrder[index]] = book.children.map(chapter => chapter.children.length);
+        // V11n (versification): number of verses for each chapter
+        bibleObj.v11n[booksOrder[index]] = book.children.map(chapter => chapter.children.length);
     });
     return bibleObj;
 };

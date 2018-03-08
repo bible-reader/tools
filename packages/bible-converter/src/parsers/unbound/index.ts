@@ -13,7 +13,7 @@ const parse: ParserFunc = (data: string, name: string) => {
   const bibleObj: IBibleObject = {
     name,
     books: {},
-    stats: {}
+    v11n: {}
   };
 
   // Indexes of tab-separated columns initialized
@@ -62,12 +62,12 @@ const parse: ParserFunc = (data: string, name: string) => {
 
       // For now, there is no support for apocryphas
       if (bookNumber <= 66) {
-        // create book object if it does not exist (in stats, too)
+        // create book object if it does not exist (in v11n, too)
         if (bibleObj.books[booksOrder[bookNumber - 1]] === undefined) {
           bibleObj.books[booksOrder[bookNumber - 1]] = {
             chapters: []
           };
-          bibleObj.stats[booksOrder[bookNumber - 1]] = [];
+          bibleObj.v11n[booksOrder[bookNumber - 1]] = [];
         }
         const book = bibleObj.books[booksOrder[bookNumber - 1]];
 
@@ -84,9 +84,9 @@ const parse: ParserFunc = (data: string, name: string) => {
     }
   });
 
-  // Stats: number of verses for each chapter
-  Object.keys(bibleObj.stats).forEach(bookSlug => {
-    bibleObj.stats[bookSlug] = bibleObj.books[bookSlug].chapters.map(
+  // V11n (versification): number of verses for each chapter
+  Object.keys(bibleObj.v11n).forEach(bookSlug => {
+    bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map(
       chapter => chapter.verses.length
     );
   });
