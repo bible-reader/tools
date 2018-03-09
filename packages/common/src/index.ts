@@ -1,8 +1,3 @@
-import * as types from "./types";
-import organization from "./organization";
+export { Versification, Passage } from "./types";
 
-export type BookNumbers = types.BookNumbers;
-export type Versification = types.Versification;
-export type Passage = types.Passage;
-
-export { organization };
+export { bookNumbers, oneChapterBooks, booksOrder } from "./organization";

@@ -1,12 +1,8 @@
-export type BookNumbers = {
-  [key: string]: number;
-};
-
 export type Versification = {
   [key: string]: Array<number>;
 };
 
-export type Passage = {
+export interface Passage {
   bookNameShort: string;
   bookNumber: number;
   startChapter: number;
@@ -15,4 +11,4 @@ export type Passage = {
   endVerse: number;
   invalidRef?: boolean;
   invalidRefMessage?: string;
-};
+}
