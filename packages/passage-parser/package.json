@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/passage-parser",
-  "version": "0.3.1",
+  "version": "0.4.1",
   "description": "Parser for Bible passage coordinates.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -20,7 +20,7 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@scripture-app/common": "^0.3.1",
+    "@scripture-app/common": "^0.4.1",
     "@types/node": "^8.0.2"
   },
   "devDependencies": {
