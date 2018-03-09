@@ -1,20 +1,17 @@
-import { organization } from "@scripture-app/common";
-import { Passage, BookNumbers, Versification } from "@scripture-app/common";
-
-const { booksOrder, oneChapterBooks } = organization;
+import {
+  // types
+  Passage,
+  Versification,
+  // data
+  bookNumbers,
+  oneChapterBooks
+} from "@scripture-app/common";
 
 function parsePassage(
   v11n: Versification,
   bookNameShort: string,
   passageString: string
 ) {
-  const bookNumbers: BookNumbers = {};
-  let index = 1;
-  for (let bookShortName of booksOrder) {
-    bookNumbers[bookShortName] = index;
-    index++;
-  }
-
   const passage: Passage = {
     bookNameShort: "",
     bookNumber: 0,

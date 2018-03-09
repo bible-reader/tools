@@ -1,3 +1,5 @@
+import { BookNumbers } from "./@types/organizationTypes";
+
 export const oneChapterBooks = [31, 57, 63, 64, 65];
 
 export const booksOrder = [
@@ -69,7 +71,7 @@ export const booksOrder = [
   "rev"
 ];
 
-export const bookNumbers = {
+export const bookNumbers: BookNumbers = {
   gen: 1,
   exo: 2,
   lev: 3,

@@ -1,14 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@scripture-app/common");
-const { booksOrder, oneChapterBooks } = common_1.organization;
 function parsePassage(v11n, bookNameShort, passageString) {
-    const bookNumbers = {};
-    let index = 1;
-    for (let bookShortName of booksOrder) {
-        bookNumbers[bookShortName] = index;
-        index++;
-    }
     const passage = {
         bookNameShort: "",
         bookNumber: 0,
@@ -18,8 +11,8 @@ function parsePassage(v11n, bookNameShort, passageString) {
         endVerse: 0
     };
     passage.bookNameShort = bookNameShort;
-    passage.bookNumber = bookNumbers[bookNameShort];
-    const isOneChapterBook = oneChapterBooks.indexOf(passage.bookNumber) >= 0;
+    passage.bookNumber = common_1.bookNumbers[bookNameShort];
+    const isOneChapterBook = common_1.oneChapterBooks.indexOf(passage.bookNumber) >= 0;
     const passageParts = passageString.split("-");
     const passageStart = passageParts[0].trim();
     const passageStartParts = passageStart.split(",");

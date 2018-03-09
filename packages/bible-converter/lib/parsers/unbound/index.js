@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@scripture-app/common");
-const { booksOrder } = common_1.organization;
 /**
  * param filePath {string} Path to file
  */
@@ -52,13 +51,13 @@ const parse = (data, name) => {
             // For now, there is no support for apocryphas
             if (bookNumber <= 66) {
                 // create book object if it does not exist (in v11n, too)
-                if (bibleObj.books[booksOrder[bookNumber - 1]] === undefined) {
-                    bibleObj.books[booksOrder[bookNumber - 1]] = {
+                if (bibleObj.books[common_1.booksOrder[bookNumber - 1]] === undefined) {
+                    bibleObj.books[common_1.booksOrder[bookNumber - 1]] = {
                         chapters: []
                     };
-                    bibleObj.v11n[booksOrder[bookNumber - 1]] = [];
+                    bibleObj.v11n[common_1.booksOrder[bookNumber - 1]] = [];
                 }
-                const book = bibleObj.books[booksOrder[bookNumber - 1]];
+                const book = bibleObj.books[common_1.booksOrder[bookNumber - 1]];
                 // create chapter object if it does not exist
                 if (book.chapters[chapterNumber - 1] === undefined) {
                     book.chapters[chapterNumber - 1] = {
