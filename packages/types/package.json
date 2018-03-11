@@ -1,0 +1,18 @@
+{
+  "name": "@scripture-app/types",
+  "version": "0.4.1",
+  "description": "Common types for scripture-app and its libraries.",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Pavel Struhar",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  }
+}
