@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/reference-validator",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Validator for Bible coordinates.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -20,8 +20,8 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@scripture-app/common": "^0.4.1",
-    "@scripture-app/types": "^0.4.1",
+    "@scripture-app/common": "^0.5.0",
+    "@scripture-app/types": "^0.5.0",
     "@types/node": "^8.0.2"
   },
   "devDependencies": {
