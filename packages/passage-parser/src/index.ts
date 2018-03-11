@@ -1,11 +1,5 @@
-import {
-  // types
-  Passage,
-  Versification,
-  // data
-  bookNumbers,
-  oneChapterBooks
-} from "@scripture-app/common";
+import { Passage, Versification } from "@scripture-app/types";
+import { bookNumbers, oneChapterBooks } from "@scripture-app/common";
 
 function parsePassage(
   v11n: Versification,

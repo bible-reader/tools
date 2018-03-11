@@ -1,4 +1,4 @@
-import { Versification, Passage } from "@scripture-app/common";
+import { Versification, Passage } from "@scripture-app/types";
 import { chapterExists, verseExists } from "@scripture-app/reference-validator";
 
 type Error = {

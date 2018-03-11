@@ -1,4 +1,4 @@
-import { Versification } from "@scripture-app/common";
+import { Versification } from "@scripture-app/types";
 
 export function chapterExists(
   v11n: Versification,
