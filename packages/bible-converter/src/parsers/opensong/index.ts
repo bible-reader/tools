@@ -1,8 +1,9 @@
 import parseFromXML = require("xml-parser");
 
 import { booksOrder } from "@scripture-app/common";
+import { BibleObject } from "@scripture-app/types";
 
-import { ParserFunc, IBibleObject } from "../../types";
+import { ParserFunc } from "../../types";
 
 /**
  * param filePath {string} Path to file
@@ -10,7 +11,7 @@ import { ParserFunc, IBibleObject } from "../../types";
 const parse: ParserFunc = (data: string, name: string) => {
   const parsedXml = parseFromXML(data.toString());
   const books = parsedXml.root.children;
-  const bibleObj: IBibleObject = {
+  const bibleObj: BibleObject = {
     name,
     books: {},
     v11n: {}

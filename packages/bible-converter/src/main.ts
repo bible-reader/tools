@@ -1,9 +1,9 @@
 import * as fs from "fs-promise";
 import { pad } from "./utils";
 
-import { IBibleObject, IBook } from "./types";
+import { BibleObject, Book } from "@scripture-app/types";
 
-export const writeChapters = async (bookPath: string, bookObj: IBook) => {
+export const writeChapters = async (bookPath: string, bookObj: Book) => {
   let index = 0;
   for (const chapter of bookObj.chapters) {
     const chapterPath = `${bookPath}/ch${pad(index + 1 + "", 3)}.json`;
@@ -18,7 +18,7 @@ export const writeChapters = async (bookPath: string, bookObj: IBook) => {
 
 export const writeBookFolders = async (
   outputPath: string,
-  bibleObj: IBibleObject
+  bibleObj: BibleObject
 ) => {
   const bookAliases = Object.keys(bibleObj.books);
   for (const bookAlias of bookAliases) {
@@ -38,7 +38,7 @@ export const writeBookFolders = async (
 
 export const splitByChapters = async (
   outputPath: string,
-  bibleObj: IBibleObject
+  bibleObj: BibleObject
 ) => {
   try {
     await fs.mkdirp(outputPath);
@@ -59,7 +59,7 @@ export const splitByChapters = async (
 
 export const toOneJSONFile = async (
   outputPath: string,
-  bibleObj: IBibleObject
+  bibleObj: BibleObject
 ) => {
   try {
     await fs.mkdirp(outputPath);
@@ -69,7 +69,7 @@ export const toOneJSONFile = async (
   }
 };
 
-export const generate = async (outputPath: string, bibleObj: IBibleObject) => {
+export const generate = async (outputPath: string, bibleObj: BibleObject) => {
   await toOneJSONFile(outputPath, bibleObj);
   await splitByChapters(outputPath, bibleObj);
 };

@@ -1,5 +1,5 @@
 export type Versification = {
-  [key: string]: Array<number>;
+  [key: string]: number[];
 };
 
 export interface Passage {
@@ -11,4 +11,22 @@ export interface Passage {
   endVerse: number;
   invalidRef?: boolean;
   invalidRefMessage?: string;
+}
+
+export interface Chapter {
+  verses: string[];
+}
+
+export interface Book {
+  chapters: Chapter[];
+}
+
+export interface BibleBooks {
+  [key: string]: Book;
+}
+
+export interface BibleVersion {
+  name: string;
+  books: BibleBooks;
+  v11n: Versification;
 }
