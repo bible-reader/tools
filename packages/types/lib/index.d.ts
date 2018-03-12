@@ -20,7 +20,7 @@ export interface Book {
 export interface BibleBooks {
     [key: string]: Book;
 }
-export interface BibleObject {
+export interface BibleVersion {
     name: string;
     books: BibleBooks;
     v11n: Versification;
