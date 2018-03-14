@@ -2,7 +2,9 @@
   "name": "scripture-app-tools",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "lerna": "^2.7.0"
