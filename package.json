@@ -7,5 +7,12 @@
   "devDependencies": {
     "lerna": "^2.7.0"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": ["packages/*"],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+  }
 }

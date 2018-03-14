@@ -1,3 +1,4 @@
+import * as path from "path";
 import * as fs from "fs-promise";
 
 import parse from "./parsers/opensong";
@@ -7,9 +8,16 @@ import { BibleVersion } from "@scripture-app/types";
 
 describe("generate()", () => {
   it("should create a structure of files", done => {
-    const testFilePath = "./src/parsers/opensong/KJV_test_sample.xmm";
+    const testFilePath = path.join(
+      __dirname,
+      "parsers/opensong/KJV_test_sample.xmm"
+    );
     const name = testFilePath;
-    const outputPath = "./testTmp/output/KJV_test_sample";
+    const outputPath = path.join(
+      __dirname,
+      "..",
+      "testTmp/output/KJV_test_sample"
+    );
 
     fs
       .readFile(testFilePath, "utf8")

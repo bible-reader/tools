@@ -1,3 +1,4 @@
+import * as path from "path";
 import * as fs from "fs-promise";
 
 import parse from ".";
@@ -6,7 +7,7 @@ import { BibleVersion } from "@scripture-app/types";
 
 describe("Unbound Bible format parser", () => {
   it("should read file and parse it into object", done => {
-    const testFilePath = "src/parsers/unbound/czech_bkr_utf8_sample.txt";
+    const testFilePath = path.join(__dirname, "czech_bkr_utf8_sample.txt");
     const name = testFilePath;
 
     fs

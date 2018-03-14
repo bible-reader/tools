@@ -23,14 +23,22 @@ async function readData() {
       i++;
     }
     const errors = validateReadingPlan(passages, v11n, true);
-    for (let error of errors) {
-      console.log(
-        `Error "${error.message}" in passage "${rows[error.passageIndex]}".`
-      );
-    }
+
+    return errors;
+    // for (let error of errors) {
+    //   console.log(
+    //     `Error "${error.message}" in passage "${rows[error.passageIndex]}".`
+    //   );
+    // }
   } catch (error) {
     console.error(error);
   }
 }
 
+describe("reading-plan-validator", () => {
+  it("should have proper number of error for given reading plan CSV", async () => {
+    const errors = await readData();
+    expect(errors.length).toBe(5);
+  });
+});
 readData();

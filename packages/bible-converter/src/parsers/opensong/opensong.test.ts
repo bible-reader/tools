@@ -1,3 +1,4 @@
+import * as path from "path";
 import * as fs from "fs-promise";
 
 import parse from ".";
@@ -6,7 +7,7 @@ import { BibleVersion } from "@scripture-app/types";
 
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {
-    const testFilePath = "src/parsers/opensong/KJV_test_sample.xmm";
+    const testFilePath = path.join(__dirname, "KJV_test_sample.xmm");
     const name = testFilePath;
 
     fs
