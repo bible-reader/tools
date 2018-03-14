@@ -37,11 +37,11 @@ function validateReadingPlan(
       ) {
         error.isError = true;
         error.message +=
-          "The starting verse number exceeds the number of verses in the chapter. ";
+          "The starting verse number exceeds the number of verses in the chapter.";
       }
     } else {
       error.isError = true;
-      error.message += "The chapter does not exist. ";
+      error.message += "The chapter does not exist.";
     }
 
     // ending verse check
@@ -58,7 +58,7 @@ function validateReadingPlan(
       ) {
         error.isError = true;
         error.message +=
-          "The ending verse number exceeds the number of verses in the chapter. ";
+          "The ending verse number exceeds the number of verses in the chapter.";
       }
     } else {
       error.isError = true;
@@ -69,14 +69,14 @@ function validateReadingPlan(
     if (passage.startChapter <= passage.endChapter) {
       if (passage.startVerse > passage.endVerse) {
         error.isError = true;
-        error.message += "End verse lesser than starting verse - swapped. ";
+        error.message += "End verse lesser than starting verse - swapped.";
         const sw = passage.endVerse;
         passage.endVerse = passage.startVerse;
         passage.startVerse = sw;
       }
     } else {
       error.isError = true;
-      error.message += "End chapter lesser than starting chapter - swapped. ";
+      error.message += "End chapter lesser than starting chapter - swapped.";
       const sw = passage.endChapter;
       passage.endChapter = passage.startChapter;
       passage.startChapter = sw;
@@ -88,7 +88,7 @@ function validateReadingPlan(
         if (passages[i - 1].endChapter == passage.startChapter) {
           if (passages[i - 1].endVerse !== passage.startVerse - 1) {
             error.isError = true;
-            error.message += "Discontinuity: Verse(s) skipped. ";
+            error.message += "Discontinuity: Verse(s) skipped.";
           }
         } else {
           if (
@@ -98,12 +98,12 @@ function validateReadingPlan(
             ]
           ) {
             error.isError = true;
-            error.message += "Discontinuity: Previous chapter was not closed. ";
+            error.message += "Discontinuity: Previous chapter was not closed.";
           }
           if (passage.startVerse !== 1) {
             error.isError = true;
             error.message +=
-              "Discontinuity: New chapter does not start with verse 1. ";
+              "Discontinuity: New chapter does not start with verse 1.";
           }
         }
       } else {
@@ -114,12 +114,12 @@ function validateReadingPlan(
           ]
         ) {
           error.isError = true;
-          error.message += "Discontinuity: Previous chapter was not closed. ";
+          error.message += "Discontinuity: Previous chapter was not closed.";
         }
         if (passage.startVerse !== 1) {
           error.isError = true;
           error.message +=
-            "Discontinuity: New book does not start with verse 1. ";
+            "Discontinuity: New book does not start with verse 1.";
         }
       }
     }
