@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/bible-converter",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/reading-plan-validator",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Script validating reading plans for Scripture App",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
