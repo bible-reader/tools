@@ -15,19 +15,19 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
             if (!reference_validator_1.verseExists(versification, passage.bookNameShort, passage.startChapter, passage.startVerse)) {
                 error.isError = true;
                 error.message +=
-                    "The starting verse number exceeds the number of verses in the chapter. ";
+                    "The starting verse number exceeds the number of verses in the chapter.";
             }
         }
         else {
             error.isError = true;
-            error.message += "The chapter does not exist. ";
+            error.message += "The chapter does not exist.";
         }
         // ending verse check
         if (reference_validator_1.chapterExists(versification, passage.bookNameShort, passage.endChapter)) {
             if (!reference_validator_1.verseExists(versification, passage.bookNameShort, passage.endChapter, passage.endVerse)) {
                 error.isError = true;
                 error.message +=
-                    "The ending verse number exceeds the number of verses in the chapter. ";
+                    "The ending verse number exceeds the number of verses in the chapter.";
             }
         }
         else {
@@ -38,7 +38,7 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
         if (passage.startChapter <= passage.endChapter) {
             if (passage.startVerse > passage.endVerse) {
                 error.isError = true;
-                error.message += "End verse lesser than starting verse - swapped. ";
+                error.message += "End verse lesser than starting verse - swapped.";
                 const sw = passage.endVerse;
                 passage.endVerse = passage.startVerse;
                 passage.startVerse = sw;
@@ -46,7 +46,7 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
         }
         else {
             error.isError = true;
-            error.message += "End chapter lesser than starting chapter - swapped. ";
+            error.message += "End chapter lesser than starting chapter - swapped.";
             const sw = passage.endChapter;
             passage.endChapter = passage.startChapter;
             passage.startChapter = sw;
@@ -57,19 +57,19 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
                 if (passages[i - 1].endChapter == passage.startChapter) {
                     if (passages[i - 1].endVerse !== passage.startVerse - 1) {
                         error.isError = true;
-                        error.message += "Discontinuity: Verse(s) skipped. ";
+                        error.message += "Discontinuity: Verse(s) skipped.";
                     }
                 }
                 else {
                     if (passages[i - 1].endVerse <
                         versification[passages[i - 1].bookNameShort][passages[i - 1].endChapter - 1]) {
                         error.isError = true;
-                        error.message += "Discontinuity: Previous chapter was not closed. ";
+                        error.message += "Discontinuity: Previous chapter was not closed.";
                     }
                     if (passage.startVerse !== 1) {
                         error.isError = true;
                         error.message +=
-                            "Discontinuity: New chapter does not start with verse 1. ";
+                            "Discontinuity: New chapter does not start with verse 1.";
                     }
                 }
             }
@@ -77,12 +77,12 @@ function validateReadingPlan(passages, versification, checkContinuity = true) {
                 if (passages[i - 1].endVerse <
                     versification[passages[i - 1].bookNameShort][passages[i - 1].endChapter - 1]) {
                     error.isError = true;
-                    error.message += "Discontinuity: Previous chapter was not closed. ";
+                    error.message += "Discontinuity: Previous chapter was not closed.";
                 }
                 if (passage.startVerse !== 1) {
                     error.isError = true;
                     error.message +=
-                        "Discontinuity: New book does not start with verse 1. ";
+                        "Discontinuity: New book does not start with verse 1.";
                 }
             }
         }
