@@ -21,7 +21,7 @@ describe("generate()", () => {
 
     fs
       .readFile(testFilePath, "utf8")
-      .then(data => parse(data, name))
+      .then(data => parse(data, "kjv", name, "en"))
       .then((bibleObj: BibleVersion) => {
         expect(bibleObj.name).toEqual(testFilePath);
         return generate(outputPath, bibleObj);

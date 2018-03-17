@@ -12,7 +12,7 @@ describe("Unbound Bible format parser", () => {
 
     fs
       .readFile(testFilePath, "utf8")
-      .then(data => parse(data, name))
+      .then(data => parse(data, "bkr", name, "cz"))
       .then((bibleObj: BibleVersion) => {
         expect(bibleObj.name).toEqual(testFilePath);
 

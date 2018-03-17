@@ -13,6 +13,16 @@ export interface Passage {
   invalidRefMessage?: string;
 }
 
+export interface ChapterReference {
+  versionId: string;
+  book: string;
+  chapter: number;
+}
+
+export interface VerseReference extends ChapterReference {
+  verse: number;
+}
+
 export interface Chapter {
   verses: string[];
 }
@@ -26,7 +36,9 @@ export interface BibleBooks {
 }
 
 export interface BibleVersion {
+  id: string;
   name: string;
+  lang: string;
   books: BibleBooks;
   v11n: Versification;
 }

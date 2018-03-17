@@ -8,11 +8,18 @@ import { ParserFunc } from "../../types";
 /**
  * param filePath {string} Path to file
  */
-const parse: ParserFunc = (data: string, name: string) => {
+const parse: ParserFunc = (
+  data: string,
+  id: string,
+  name: string,
+  lang: string
+) => {
   const parsedXml = parseFromXML(data.toString());
   const books = parsedXml.root.children;
   const bibleObj: BibleVersion = {
+    id,
     name,
+    lang,
     books: {},
     v11n: {}
   };

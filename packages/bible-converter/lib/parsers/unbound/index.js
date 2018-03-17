@@ -4,10 +4,12 @@ const common_1 = require("@scripture-app/common");
 /**
  * param filePath {string} Path to file
  */
-const parse = (data, name) => {
+const parse = (data, id, name, lang) => {
     const lines = data.toString().split("\n");
     const bibleObj = {
+        id,
         name,
+        lang,
         books: {},
         v11n: {}
     };

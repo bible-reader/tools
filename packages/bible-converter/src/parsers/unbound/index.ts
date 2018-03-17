@@ -6,11 +6,18 @@ import { ParserFunc } from "../../types";
 /**
  * param filePath {string} Path to file
  */
-const parse: ParserFunc = (data: string, name: string) => {
+const parse: ParserFunc = (
+  data: string,
+  id: string,
+  name: string,
+  lang: string
+) => {
   const lines = data.toString().split("\n");
 
   const bibleObj: BibleVersion = {
+    id,
     name,
+    lang,
     books: {},
     v11n: {}
   };

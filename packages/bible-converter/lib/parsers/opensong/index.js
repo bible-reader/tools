@@ -5,11 +5,13 @@ const common_1 = require("@scripture-app/common");
 /**
  * param filePath {string} Path to file
  */
-const parse = (data, name) => {
+const parse = (data, id, name, lang) => {
     const parsedXml = parseFromXML(data.toString());
     const books = parsedXml.root.children;
     const bibleObj = {
+        id,
         name,
+        lang,
         books: {},
         v11n: {}
     };
