@@ -1,7 +1,7 @@
 import { BibleVersion } from "@scripture-app/types";
 
 export type ParserFunc = (
-  filePath: string,
+  data: string,
   id: string,
   name: string,
   lang: string
