@@ -19,16 +19,20 @@ export interface ChapterReference {
   chapter: number;
 }
 
+export interface Chapter extends ChapterReference {
+  verses: string[];
+}
+
 export interface VerseReference extends ChapterReference {
   verse: number;
 }
 
-export interface Chapter {
+export interface ChapterContent {
   verses: string[];
 }
 
 export interface Book {
-  chapters: Chapter[];
+  chapters: ChapterContent[];
 }
 
 export interface BibleBooks {
