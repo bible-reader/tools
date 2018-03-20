@@ -1,7 +1,7 @@
 import * as fs from "fs-promise";
 import { pad } from "./utils";
 
-import { BibleVersion, Book } from "@scripture-app/types";
+import { BibleVersionContent, Book } from "@scripture-app/types";
 
 export const writeChapters = async (bookPath: string, bookObj: Book) => {
   let index = 0;
@@ -18,7 +18,7 @@ export const writeChapters = async (bookPath: string, bookObj: Book) => {
 
 export const writeBookFolders = async (
   outputPath: string,
-  bibleObj: BibleVersion
+  bibleObj: BibleVersionContent
 ) => {
   const bookAliases = Object.keys(bibleObj.books);
   for (const bookAlias of bookAliases) {
@@ -38,7 +38,7 @@ export const writeBookFolders = async (
 
 export const splitByChapters = async (
   outputPath: string,
-  bibleObj: BibleVersion
+  bibleObj: BibleVersionContent
 ) => {
   try {
     await fs.mkdirp(outputPath);
@@ -59,7 +59,7 @@ export const splitByChapters = async (
 
 export const toOneJSONFile = async (
   outputPath: string,
-  bibleObj: BibleVersion
+  bibleObj: BibleVersionContent
 ) => {
   try {
     await fs.mkdirp(outputPath);
@@ -69,7 +69,10 @@ export const toOneJSONFile = async (
   }
 };
 
-export const generate = async (outputPath: string, bibleObj: BibleVersion) => {
+export const generate = async (
+  outputPath: string,
+  bibleObj: BibleVersionContent
+) => {
   await toOneJSONFile(outputPath, bibleObj);
   await splitByChapters(outputPath, bibleObj);
 };

@@ -43,6 +43,8 @@ export interface BibleVersion {
   id: string;
   name: string;
   lang: string;
-  books: BibleBooks;
   v11n: Versification;
+}
+export interface BibleVersionContent extends BibleVersion {
+  books: BibleBooks;
 }

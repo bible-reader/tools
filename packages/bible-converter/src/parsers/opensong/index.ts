@@ -1,7 +1,7 @@
 import parseFromXML = require("xml-parser");
 
 import { booksOrder } from "@scripture-app/common";
-import { BibleVersion } from "@scripture-app/types";
+import { BibleVersionContent } from "@scripture-app/types";
 
 import { ParserFunc } from "../../types";
 
@@ -16,7 +16,7 @@ const parse: ParserFunc = (
 ) => {
   const parsedXml = parseFromXML(data.toString());
   const books = parsedXml.root.children;
-  const bibleObj: BibleVersion = {
+  const bibleObj: BibleVersionContent = {
     id,
     name,
     lang,

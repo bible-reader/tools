@@ -3,7 +3,7 @@ import * as fs from "fs-promise";
 
 import parse from ".";
 
-import { BibleVersion } from "@scripture-app/types";
+import { BibleVersionContent } from "@scripture-app/types";
 
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {
@@ -13,7 +13,7 @@ describe("OpenSong Bible format parser", () => {
     fs
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, "kjv", name, "en"))
-      .then((bibleObj: BibleVersion) => {
+      .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj.name).toEqual(testFilePath);
 
         const books = bibleObj.books;

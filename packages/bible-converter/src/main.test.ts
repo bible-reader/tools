@@ -4,7 +4,7 @@ import * as fs from "fs-promise";
 import parse from "./parsers/opensong";
 import { generate } from "./main";
 
-import { BibleVersion } from "@scripture-app/types";
+import { BibleVersionContent } from "@scripture-app/types";
 
 describe("generate()", () => {
   it("should create a structure of files", done => {
@@ -22,7 +22,7 @@ describe("generate()", () => {
     fs
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, "kjv", name, "en"))
-      .then((bibleObj: BibleVersion) => {
+      .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj.name).toEqual(testFilePath);
         return generate(outputPath, bibleObj);
       })

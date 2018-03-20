@@ -1,5 +1,5 @@
 import { booksOrder } from "@scripture-app/common";
-import { BibleVersion } from "@scripture-app/types";
+import { BibleVersionContent } from "@scripture-app/types";
 
 import { ParserFunc } from "../../types";
 
@@ -14,7 +14,7 @@ const parse: ParserFunc = (
 ) => {
   const lines = data.toString().split("\n");
 
-  const bibleObj: BibleVersion = {
+  const bibleObj: BibleVersionContent = {
     id,
     name,
     lang,
