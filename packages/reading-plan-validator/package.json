@@ -1,6 +1,6 @@
 {
   "name": "@scripture-app/reading-plan-validator",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Script validating reading plans for Scripture App",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -24,9 +24,9 @@
   "license": "MIT",
   "dependencies": {
     "@scripture-app/common": "^0.5.0",
-    "@scripture-app/passage-parser": "^0.6.5",
-    "@scripture-app/reference-validator": "^0.6.5",
-    "@scripture-app/types": "^0.6.5",
+    "@scripture-app/passage-parser": "^0.6.6",
+    "@scripture-app/reference-validator": "^0.6.6",
+    "@scripture-app/types": "^0.6.6",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
     "mz": "^2.7.0"
