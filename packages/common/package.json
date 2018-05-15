@@ -2,7 +2,7 @@
   "name": "@bible-reader/common",
   "version": "0.5.0",
   "description":
-    "Common data structures and types for scripture-app and its libraries.",
+    "Common data structures and types for bible-reader and its libraries.",
   "repository": {
     "type": "git",
     "url": "https://github.com/bible-reader/tools.git"

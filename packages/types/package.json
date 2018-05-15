@@ -1,7 +1,7 @@
 {
   "name": "@bible-reader/types",
   "version": "0.6.6",
-  "description": "Common types for scripture-app and its libraries.",
+  "description": "Common types for bible-reader and its libraries.",
   "repository": {
     "type": "git",
     "url": "https://github.com/bible-reader/tools.git"
