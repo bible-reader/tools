@@ -2,6 +2,10 @@
   "name": "@scripture-app/bible-converter",
   "version": "0.6.6",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bible-reader/tools.git"
+  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -12,12 +16,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "bible",
-    "xml",
-    "json",
-    "opensong"
-  ],
+  "keywords": ["bible", "xml", "json", "opensong"],
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
@@ -44,13 +43,6 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }

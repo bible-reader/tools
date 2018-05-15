@@ -2,6 +2,10 @@
   "name": "@scripture-app/reading-plan-validator",
   "version": "0.6.6",
   "description": "Script validating reading plans for Scripture App",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bible-reader/tools.git"
+  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {

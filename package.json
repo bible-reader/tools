@@ -1,5 +1,9 @@
 {
   "name": "scripture-app-tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bible-reader/tools.git"
+  },
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",

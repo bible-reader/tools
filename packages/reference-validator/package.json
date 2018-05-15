@@ -2,6 +2,10 @@
   "name": "@scripture-app/reference-validator",
   "version": "0.6.6",
   "description": "Validator for Bible coordinates.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bible-reader/tools.git"
+  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -9,11 +13,7 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [
-    "bible",
-    "reference",
-    "validator"
-  ],
+  "keywords": ["bible", "reference", "validator"],
   "publishConfig": {
     "access": "public"
   },
@@ -39,13 +39,6 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   }
 }
