@@ -1,7 +1,7 @@
 import * as fs from "fs-promise";
 import { pad } from "./utils";
 
-import { BibleVersionContent, Book } from "@scripture-app/types";
+import { BibleVersionContent, Book } from "@bible-reader/types";
 
 export const writeChapters = async (bookPath: string, bookObj: Book) => {
   let index = 0;

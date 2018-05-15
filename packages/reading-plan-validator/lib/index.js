@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const reference_validator_1 = require("@scripture-app/reference-validator");
+const reference_validator_1 = require("@bible-reader/reference-validator");
 function validateReadingPlan(passages, versification, checkContinuity = true) {
     const errors = [];
     let i = 0;

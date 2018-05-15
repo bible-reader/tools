@@ -1,4 +1,4 @@
-import { BibleVersionContent } from "@scripture-app/types";
+import { BibleVersionContent } from "@bible-reader/types";
 
 export type ParserFunc = (
   data: string,

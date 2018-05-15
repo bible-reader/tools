@@ -1,5 +1,5 @@
 {
-  "name": "@scripture-app/bible-converter",
+  "name": "@bible-reader/bible-converter",
   "version": "0.6.6",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
   "repository": {
@@ -20,8 +20,8 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@scripture-app/common": "^0.5.0",
-    "@scripture-app/types": "^0.6.6",
+    "@bible-reader/common": "^0.5.0",
+    "@bible-reader/types": "^0.6.6",
     "@types/fs-promise": "^1.0.3",
     "@types/node": "^8.0.2",
     "@types/xml-parser": "^1.2.28",

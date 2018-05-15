@@ -1,4 +1,4 @@
-import { Versification, Passage } from "@scripture-app/types";
+import { Versification, Passage } from "@bible-reader/types";
 declare function validateReadingPlan(passages: Array<Passage>, versification: Versification, checkContinuity?: boolean): {
     passageIndex: number;
     isError: boolean;

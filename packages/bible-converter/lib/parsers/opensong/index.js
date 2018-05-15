@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const parseFromXML = require("xml-parser");
-const common_1 = require("@scripture-app/common");
+const common_1 = require("@bible-reader/common");
 /**
  * param filePath {string} Path to file
  */

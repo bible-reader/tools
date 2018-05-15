@@ -1,5 +1,5 @@
 {
-  "name": "@scripture-app/reading-plan-validator",
+  "name": "@bible-reader/reading-plan-validator",
   "version": "0.6.6",
   "description": "Script validating reading plans for Scripture App",
   "repository": {
@@ -27,10 +27,10 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@scripture-app/common": "^0.5.0",
-    "@scripture-app/passage-parser": "^0.6.6",
-    "@scripture-app/reference-validator": "^0.6.6",
-    "@scripture-app/types": "^0.6.6",
+    "@bible-reader/common": "^0.5.0",
+    "@bible-reader/passage-parser": "^0.6.6",
+    "@bible-reader/reference-validator": "^0.6.6",
+    "@bible-reader/types": "^0.6.6",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
     "mz": "^2.7.0"

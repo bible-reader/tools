@@ -1,4 +1,4 @@
-import { BibleVersionContent, Book } from "@scripture-app/types";
+import { BibleVersionContent, Book } from "@bible-reader/types";
 export declare const writeChapters: (bookPath: string, bookObj: Book) => Promise<void>;
 export declare const writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;
 export declare const splitByChapters: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;

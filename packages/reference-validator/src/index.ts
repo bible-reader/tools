@@ -1,4 +1,4 @@
-import { Versification } from "@scripture-app/types";
+import { Versification } from "@bible-reader/types";
 
 export function chapterExists(
   v11n: Versification,

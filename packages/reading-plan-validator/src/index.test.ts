@@ -1,8 +1,8 @@
 import * as path from "path";
 import { fs } from "mz";
 
-import { Passage } from "@scripture-app/types";
-import parsePassage from "@scripture-app/passage-parser";
+import { Passage } from "@bible-reader/types";
+import parsePassage from "@bible-reader/passage-parser";
 import validateReadingPlan from ".";
 import v11n from "../testData/kjvV11n";
 

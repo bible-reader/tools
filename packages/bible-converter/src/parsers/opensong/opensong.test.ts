@@ -3,7 +3,7 @@ import * as fs from "fs-promise";
 
 import parse from ".";
 
-import { BibleVersionContent } from "@scripture-app/types";
+import { BibleVersionContent } from "@bible-reader/types";
 
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {

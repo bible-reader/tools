@@ -12,7 +12,7 @@ import {
   oneChapterBooks,
   booksOrder,
   bookNumbers
-} from "@scripture-app/common";
+} from "@bible-reader/common";
 
 const verseReference = {
   book: "gen",

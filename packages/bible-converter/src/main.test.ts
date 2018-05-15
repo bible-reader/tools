@@ -4,7 +4,7 @@ import * as fs from "fs-promise";
 import parse from "./parsers/opensong";
 import { generate } from "./main";
 
-import { BibleVersionContent } from "@scripture-app/types";
+import { BibleVersionContent } from "@bible-reader/types";
 
 describe("generate()", () => {
   it("should create a structure of files", done => {

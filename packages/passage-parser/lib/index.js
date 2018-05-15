@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@scripture-app/common");
+const common_1 = require("@bible-reader/common");
 function parsePassage(v11n, bookNameShort, passageString) {
     const passage = {
         bookNameShort: "",

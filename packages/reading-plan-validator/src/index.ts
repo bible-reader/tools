@@ -1,5 +1,5 @@
-import { Versification, Passage } from "@scripture-app/types";
-import { chapterExists, verseExists } from "@scripture-app/reference-validator";
+import { Versification, Passage } from "@bible-reader/types";
+import { chapterExists, verseExists } from "@bible-reader/reference-validator";
 
 type Error = {
   passageIndex: number;

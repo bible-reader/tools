@@ -1,5 +1,5 @@
-import { booksOrder } from "@scripture-app/common";
-import { BibleVersionContent } from "@scripture-app/types";
+import { booksOrder } from "@bible-reader/common";
+import { BibleVersionContent } from "@bible-reader/types";
 
 import { ParserFunc } from "../../types";
 

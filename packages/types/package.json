@@ -1,5 +1,5 @@
 {
-  "name": "@scripture-app/types",
+  "name": "@bible-reader/types",
   "version": "0.6.6",
   "description": "Common types for scripture-app and its libraries.",
   "repository": {
