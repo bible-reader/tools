@@ -21,6 +21,7 @@ export interface ChapterReference {
 
 export interface Chapter extends ChapterReference {
   verses: string[];
+  loading: boolean;
 }
 
 export interface VerseReference extends ChapterReference {
