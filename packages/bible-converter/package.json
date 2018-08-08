@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/bible-converter",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "@bible-reader/common": "^0.7.0",
-    "@bible-reader/types": "^0.7.0",
+    "@bible-reader/types": "^0.8.0",
     "@types/fs-promise": "^1.0.3",
     "@types/node": "^8.0.2",
     "@types/xml-parser": "^1.2.28",

@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/reference-validator",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Validator for Bible coordinates.",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "@bible-reader/common": "^0.7.0",
-    "@bible-reader/types": "^0.7.0",
+    "@bible-reader/types": "^0.8.0",
     "@types/node": "^8.0.2"
   },
   "devDependencies": {

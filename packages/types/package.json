@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/types",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Common types for bible-reader and its libraries.",
   "repository": {
     "type": "git",
