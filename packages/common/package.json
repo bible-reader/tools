@@ -17,6 +17,6 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^2.6.2"
+    "typescript": "^3.1.6"
   }
 }
