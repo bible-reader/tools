@@ -1,0 +1,45 @@
+{
+  "name": "@bible-reader/v11n-utils",
+  "version": "0.1.0",
+  "description": "Utility library for working with v11n (versification) data object",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bible-reader/tools.git"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "tsc -p tsconfig.build.json",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Pavel Struhar",
+  "license": "MIT",
+  "dependencies": {
+    "@bible-reader/common": "^0.7.0",
+    "@bible-reader/types": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.4",
+    "typescript": "^2.6.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
