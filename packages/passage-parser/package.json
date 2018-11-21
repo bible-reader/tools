@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/passage-parser",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Parser for Bible passage coordinates.",
   "repository": {
     "type": "git",
@@ -13,15 +13,19 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": ["bible", "passage", "parser"],
+  "keywords": [
+    "bible",
+    "passage",
+    "parser"
+  ],
   "publishConfig": {
     "access": "public"
   },
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@bible-reader/common": "^0.7.0",
-    "@bible-reader/types": "^0.8.0",
+    "@bible-reader/common": "^0.9.0",
+    "@bible-reader/types": "^0.9.0",
     "@types/node": "^8.0.2"
   },
   "devDependencies": {
@@ -39,6 +43,13 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.ts$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
