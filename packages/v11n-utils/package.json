@@ -10,7 +10,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "prepare": "tsc -p tsconfig.build.json",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "publishConfig": {
