@@ -29,7 +29,7 @@
   "dependencies": {
     "@bible-reader/common": "^1.0.0",
     "@bible-reader/passage-parser": "^1.0.0",
-    "@bible-reader/reference-validator": "^0.9.0",
+    "@bible-reader/v11n-tools": "^1.0.0",
     "@bible-reader/types": "^1.0.0",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
