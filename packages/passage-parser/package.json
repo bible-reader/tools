@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/passage-parser",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Parser for Bible passage coordinates.",
   "repository": {
     "type": "git",
@@ -24,8 +24,8 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@bible-reader/common": "^0.9.0",
-    "@bible-reader/types": "^0.9.0",
+    "@bible-reader/common": "^1.0.0",
+    "@bible-reader/types": "^1.0.0",
     "@types/node": "^8.0.2"
   },
   "devDependencies": {
