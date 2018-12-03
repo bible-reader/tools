@@ -9,7 +9,7 @@
     "bootstrap": "lerna bootstrap",
     "test": "jest",
     "test:watch": "jest --watch",
-    "publish": "lerna publish"
+    "lerna:publish": "lerna publish"
   },
   "devDependencies": {
     "lerna": "^3.4.3"
