@@ -8,7 +8,7 @@ This repository contains libraries and tools that are used either as dependencie
 - [common](https://github.com/bible-reader/tools/tree/master/packages/common) contains mostly data that are shared across multiple other packages and applications
 - [passage-parser](https://github.com/bible-reader/tools/tree/master/packages/passage-parser) parses Bible passage string to an object
 - [reading-plan-validator](https://github.com/bible-reader/tools/tree/master/packages/reading-plan-validator) is a tool that validates if a sequence of Bible passages is continuous and other criteria
-- [v11n-tools](https://github.com/bible-reader/tools/tree/master/packages/v11n-tools) is a library that provides functions to validate and get Bible references for a given versification (i.e. system of books, chapters and verses in a particular Bible version; v11n in short)
+- [v11n-utils](https://github.com/bible-reader/tools/tree/master/packages/v11n-utils) is a library that provides functions to validate and get Bible references for a given versification (i.e. system of books, chapters and verses in a particular Bible version; v11n in short)
 - [types](https://github.com/bible-reader/tools/tree/master/packages/types) defines common types for Bible data used across all bible-reader libraries and applications
 
 ## For developers
