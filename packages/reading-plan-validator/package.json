@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/reading-plan-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Script validating reading plans for Scripture App",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
     "@bible-reader/common": "^1.0.0",
     "@bible-reader/passage-parser": "^1.0.0",
     "@bible-reader/types": "^1.0.0",
-    "@bible-reader/v11n-utils": "^1.0.0",
+    "@bible-reader/v11n-utils": "^1.0.2",
     "@types/mz": "^0.0.32",
     "@types/node": "^8.0.47",
     "mz": "^2.7.0"

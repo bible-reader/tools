@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/v11n-utils",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Utility library for working with v11n (versification) data object",
   "repository": {
     "type": "git",
