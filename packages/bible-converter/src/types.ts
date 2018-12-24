@@ -4,5 +4,6 @@ export type ParserFunc = (
   data: string,
   id: string,
   name: string,
-  lang: string
+  lang: string,
+  onProgressCallback?: (progress: number, message: string) => void
 ) => BibleVersionContent;

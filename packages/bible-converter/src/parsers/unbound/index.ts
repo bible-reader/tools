@@ -6,12 +6,7 @@ import { ParserFunc } from "../../types";
 /**
  * param filePath {string} Path to file
  */
-const parse: ParserFunc = (
-  data: string,
-  id: string,
-  name: string,
-  lang: string
-) => {
+const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   const lines = data.toString().split("\n");
 
   const bibleObj: BibleVersionContent = {
@@ -74,6 +69,10 @@ const parse: ParserFunc = (
             chapters: []
           };
           bibleObj.v11n[booksOrder[bookNumber - 1]] = [];
+
+          if (updateProgress) {
+            updateProgress(bookNumber / 66, booksOrder[bookNumber - 1]);
+          }
         }
         const book = bibleObj.books[booksOrder[bookNumber - 1]];
 

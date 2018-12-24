@@ -18,10 +18,12 @@ export const writeChapters = async (bookPath: string, bookObj: Book) => {
 
 export const writeBookFolders = async (
   outputPath: string,
-  bibleObj: BibleVersionContent
+  bibleObj: BibleVersionContent,
+  updateProgress?: (progress: number, message: string) => void
 ) => {
   const bookAliases = Object.keys(bibleObj.books);
-  for (const bookAlias of bookAliases) {
+  for (let i = 0; i < bookAliases.length; i++) {
+    const bookAlias = bookAliases[i];
     const bookPath = `${outputPath}/${bookAlias}`;
     await fs
       .mkdirp(bookPath)
@@ -33,19 +35,26 @@ export const writeBookFolders = async (
         console.error("Error creating book folder: ", err);
         return err;
       });
+    if (updateProgress) {
+      updateProgress(
+        (i + 1) / bookAliases.length,
+        "Writing JSON files of " + bookAlias
+      );
+    }
   }
 };
 
 export const splitByChapters = async (
   outputPath: string,
-  bibleObj: BibleVersionContent
+  bibleObj: BibleVersionContent,
+  updateProgress?: (progress: number, message: string) => void
 ) => {
   try {
     await fs.mkdirp(outputPath);
-    await writeBookFolders(outputPath, bibleObj);
+    await writeBookFolders(outputPath, bibleObj, updateProgress);
   } catch (err) {
     if (err.code === "EEXIST") {
-      return writeBookFolders(outputPath, bibleObj);
+      return writeBookFolders(outputPath, bibleObj, updateProgress);
     } else {
       console.error("Error creating book folder: ", err);
     }
@@ -71,10 +80,14 @@ export const toOneJSONFile = async (
 
 export const generate = async (
   outputPath: string,
-  bibleObj: BibleVersionContent
+  bibleObj: BibleVersionContent,
+  updateProgress?: (progress: number, message: string) => void
 ) => {
+  if (updateProgress) {
+    updateProgress(0, "Writing one JSON file");
+  }
   await toOneJSONFile(outputPath, bibleObj);
-  await splitByChapters(outputPath, bibleObj);
+  await splitByChapters(outputPath, bibleObj, updateProgress);
 };
 
 export default {

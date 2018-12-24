@@ -8,12 +8,7 @@ import { ParserFunc } from "../../types";
 /**
  * param filePath {string} Path to file
  */
-const parse: ParserFunc = (
-  data: string,
-  id: string,
-  name: string,
-  lang: string
-) => {
+const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   const parsedXml = parseFromXML(data.toString());
   const books = parsedXml.root.children;
   const bibleObj: BibleVersionContent = {
@@ -36,6 +31,11 @@ const parse: ParserFunc = (
     bibleObj.v11n[booksOrder[index]] = book.children.map(
       chapter => chapter.children.length
     );
+
+    if (updateProgress) {
+      // progress is current book index / number of all books (66)
+      updateProgress((index + 1) / booksOrder.length, booksOrder[index]);
+    }
   });
   return bibleObj;
 };
