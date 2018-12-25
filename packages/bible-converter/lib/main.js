@@ -23,9 +23,10 @@ exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, f
         index++;
     }
 });
-exports.writeBookFolders = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
+exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
     const bookAliases = Object.keys(bibleObj.books);
-    for (const bookAlias of bookAliases) {
+    for (let i = 0; i < bookAliases.length; i++) {
+        const bookAlias = bookAliases[i];
         const bookPath = `${outputPath}/${bookAlias}`;
         yield fs
             .mkdirp(bookPath)
@@ -37,16 +38,19 @@ exports.writeBookFolders = (outputPath, bibleObj) => __awaiter(this, void 0, voi
             console.error("Error creating book folder: ", err);
             return err;
         });
+        if (updateProgress) {
+            updateProgress((i + 1) / bookAliases.length, "Writing JSON files of " + bookAlias);
+        }
     }
 });
-exports.splitByChapters = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
+exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
     try {
         yield fs.mkdirp(outputPath);
-        yield exports.writeBookFolders(outputPath, bibleObj);
+        yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
     }
     catch (err) {
         if (err.code === "EEXIST") {
-            return exports.writeBookFolders(outputPath, bibleObj);
+            return exports.writeBookFolders(outputPath, bibleObj, updateProgress);
         }
         else {
             console.error("Error creating book folder: ", err);
@@ -68,9 +72,12 @@ exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(this, void 0, void 0
         console.error("Error writing one complete JSON file: ", err);
     }
 });
-exports.generate = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
+exports.generate = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+    if (updateProgress) {
+        updateProgress(0, "Writing one JSON file");
+    }
     yield exports.toOneJSONFile(outputPath, bibleObj);
-    yield exports.splitByChapters(outputPath, bibleObj);
+    yield exports.splitByChapters(outputPath, bibleObj, updateProgress);
 });
 exports.default = {
     generate: exports.generate,

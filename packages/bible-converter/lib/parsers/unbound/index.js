@@ -4,7 +4,7 @@ const common_1 = require("@bible-reader/common");
 /**
  * param filePath {string} Path to file
  */
-const parse = (data, id, name, lang) => {
+const parse = (data, id, name, lang, updateProgress) => {
     const lines = data.toString().split("\n");
     const bibleObj = {
         id,
@@ -58,6 +58,9 @@ const parse = (data, id, name, lang) => {
                         chapters: []
                     };
                     bibleObj.v11n[common_1.booksOrder[bookNumber - 1]] = [];
+                    if (updateProgress) {
+                        updateProgress(bookNumber / 66, common_1.booksOrder[bookNumber - 1]);
+                    }
                 }
                 const book = bibleObj.books[common_1.booksOrder[bookNumber - 1]];
                 // create chapter object if it does not exist
