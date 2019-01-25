@@ -5,6 +5,10 @@ import { BibleVersionContent } from "@bible-reader/types";
 
 import { ParserFunc } from "../../types";
 
+const isBook = (book: any) => book.name === "b";
+const isChapter = (chapter: any) => chapter.name === "c";
+const isVerse = (verse: any) => verse.name === "v";
+
 /**
  * param filePath {string} Path to file
  */
@@ -19,18 +23,22 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     v11n: {}
   };
 
-  books.forEach((book, index) => {
+  books.filter(isBook).forEach((book, index) => {
     bibleObj.books[booksOrder[index]] = {
       chapters: []
     };
-    bibleObj.books[booksOrder[index]].chapters = book.children.map(chapter => ({
-      verses: chapter.children.map(verse => verse.content || "")
-    }));
+    bibleObj.books[booksOrder[index]].chapters = book.children
+      .filter(isChapter)
+      .map(chapter => ({
+        verses: chapter.children
+          .filter(isVerse)
+          .map(verse => verse.content || "")
+      }));
 
     // V11n (versification): number of verses for each chapter
-    bibleObj.v11n[booksOrder[index]] = book.children.map(
-      chapter => chapter.children.length
-    );
+    bibleObj.v11n[booksOrder[index]] = book.children
+      .filter(isChapter)
+      .map(chapter => chapter.children.filter(isVerse).length);
 
     if (updateProgress) {
       // progress is current book index / number of all books (66)
