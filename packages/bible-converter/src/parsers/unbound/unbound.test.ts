@@ -14,6 +14,8 @@ describe("Unbound Bible format parser", () => {
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, "bkr", name, "cz"))
       .then((bibleObj: BibleVersionContent) => {
+        expect(bibleObj).toMatchSnapshot();
+
         expect(bibleObj.name).toEqual(testFilePath);
 
         const books = bibleObj.books;

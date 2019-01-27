@@ -17,6 +17,9 @@ describe("OpenSong Bible format parser", () => {
         expect(bibleObj.name).toEqual(testFilePath);
 
         const books = bibleObj.books;
+
+        expect(bibleObj).toMatchSnapshot();
+
         expect(Object.keys(books).length).toEqual(5);
 
         expect(books.gen.chapters[0].verses[0]).toEqual(
