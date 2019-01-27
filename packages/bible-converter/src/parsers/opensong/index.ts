@@ -5,7 +5,19 @@ import { BibleVersionContent } from "@bible-reader/types";
 
 import { ParserFunc } from "../../types";
 
-const isBook = (book: any) => book.name === "b";
+interface BookList {
+  [bookName: string]: number;
+}
+
+type Book = parseFromXML.Node;
+
+const NUM_BOOKS_OT = 39;
+const NUM_BOOKS_NT = 27;
+
+const isBook = (otBooks: BookList, ntBooks: BookList, book: Book) =>
+  book.name === "b" &&
+  (otBooks[book.attributes.n] !== undefined ||
+    ntBooks[book.attributes.n] !== undefined);
 const isChapter = (chapter: any) => chapter.name === "c";
 const isVerse = (verse: any) => verse.name === "v";
 
@@ -14,7 +26,7 @@ const isVerse = (verse: any) => verse.name === "v";
  */
 const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   const parsedXml = parseFromXML(data.toString());
-  const books = parsedXml.root.children;
+  const children = parsedXml.root.children;
   const bibleObj: BibleVersionContent = {
     id,
     name,
@@ -23,7 +35,34 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     v11n: {}
   };
 
-  books.filter(isBook).forEach((book, index) => {
+  let otIndex = 0;
+  let ntIndex = 0;
+  const otBooks: BookList = {};
+  const ntBooks: BookList = {};
+
+  children.forEach(child => {
+    if (child.name === "OT") {
+      child.children.forEach(item => {
+        if (otIndex < NUM_BOOKS_OT) {
+          otBooks[item.attributes.n] = otIndex;
+          otIndex++;
+        }
+      });
+    }
+    if (child.name === "NT") {
+      child.children.forEach(item => {
+        if (ntIndex < NUM_BOOKS_NT) {
+          ntBooks[item.attributes.n] = ntIndex;
+          ntIndex++;
+        }
+      });
+    }
+  });
+
+  const isInBookList = (book: Book) => isBook(otBooks, ntBooks, book);
+
+  const books = children.filter(isInBookList);
+  books.forEach((book, index) => {
     bibleObj.books[booksOrder[index]] = {
       chapters: []
     };

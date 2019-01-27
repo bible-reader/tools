@@ -2,7 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const parseFromXML = require("xml-parser");
 const common_1 = require("@bible-reader/common");
-const isBook = (book) => book.name === "b";
+const NUM_BOOKS_OT = 39;
+const NUM_BOOKS_NT = 27;
+const isBook = (otBooks, ntBooks, book) => book.name === "b" &&
+    (otBooks[book.attributes.n] !== undefined ||
+        ntBooks[book.attributes.n] !== undefined);
 const isChapter = (chapter) => chapter.name === "c";
 const isVerse = (verse) => verse.name === "v";
 /**
@@ -10,7 +14,7 @@ const isVerse = (verse) => verse.name === "v";
  */
 const parse = (data, id, name, lang, updateProgress) => {
     const parsedXml = parseFromXML(data.toString());
-    const books = parsedXml.root.children;
+    const children = parsedXml.root.children;
     const bibleObj = {
         id,
         name,
@@ -18,7 +22,31 @@ const parse = (data, id, name, lang, updateProgress) => {
         books: {},
         v11n: {}
     };
-    books.filter(isBook).forEach((book, index) => {
+    let otIndex = 0;
+    let ntIndex = 0;
+    const otBooks = {};
+    const ntBooks = {};
+    children.forEach(child => {
+        if (child.name === "OT") {
+            child.children.forEach(item => {
+                if (otIndex < NUM_BOOKS_OT) {
+                    otBooks[item.attributes.n] = otIndex;
+                    otIndex++;
+                }
+            });
+        }
+        if (child.name === "NT") {
+            child.children.forEach(item => {
+                if (ntIndex < NUM_BOOKS_NT) {
+                    ntBooks[item.attributes.n] = ntIndex;
+                    ntIndex++;
+                }
+            });
+        }
+    });
+    const isInBookList = (book) => isBook(otBooks, ntBooks, book);
+    const books = children.filter(isInBookList);
+    books.forEach((book, index) => {
         bibleObj.books[common_1.booksOrder[index]] = {
             chapters: []
         };
