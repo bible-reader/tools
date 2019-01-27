@@ -1,9 +1,10 @@
 import * as path from "path";
 import * as fs from "fs-promise";
 
-import parse from ".";
-
 import { BibleVersionContent } from "@bible-reader/types";
+
+import parse, { isBook } from ".";
+import { defaultNTBooks, defaultOTBooks } from "./defaultBookLists";
 
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {
@@ -41,5 +42,50 @@ describe("OpenSong Bible format parser", () => {
       .catch((err: Error) => {
         done(err);
       });
+  });
+
+  it("does not accept book if not <b> element", () => {
+    expect(
+      isBook(defaultOTBooks, defaultNTBooks, {
+        attributes: { n: "nothing" },
+        name: "x",
+        children: []
+      })
+    ).toBe(false);
+    expect(
+      isBook(defaultOTBooks, defaultNTBooks, {
+        attributes: { n: "Genesis" },
+        name: "x",
+        children: []
+      })
+    ).toBe(false);
+  });
+
+  it("can use default book lists", () => {
+    expect(
+      isBook(defaultOTBooks, defaultNTBooks, {
+        attributes: { n: "nothing" },
+        name: "b",
+        children: []
+      })
+    ).toBe(false);
+    expect(
+      isBook(defaultOTBooks, defaultNTBooks, {
+        attributes: { n: "Genesis" },
+        name: "b",
+        children: []
+      })
+    ).toBe(true);
+    expect(
+      isBook(defaultOTBooks, defaultNTBooks, {
+        attributes: { n: "Philippians" },
+        name: "b",
+        children: []
+      })
+    ).toBe(true);
+  });
+  it("book lists have correct number of books", () => {
+    expect(Object.keys(defaultNTBooks).length).toBe(27);
+    expect(Object.keys(defaultOTBooks).length).toBe(39);
   });
 });
