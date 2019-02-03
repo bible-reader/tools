@@ -6,7 +6,7 @@ export function pad(n: string, width: number, z?: string) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
-export function getHash(payload: string, length: number = 8): string {
+export function getHash(payload: string, length: number = 6): string {
   const hash = crypto
     .createHash("sha1")
     .update(payload)
