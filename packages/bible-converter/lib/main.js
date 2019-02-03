@@ -12,18 +12,35 @@ const fs = require("fs-promise");
 const utils_1 = require("./utils");
 exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, function* () {
     let index = 0;
+    const chaptersHashes = [];
     for (const chapter of bookObj.chapters) {
-        const chapterPath = `${bookPath}/ch${utils_1.pad(index + 1 + "", 3)}.json`;
+        const payload = JSON.stringify(chapter);
+        const hash = utils_1.getHash(payload);
+        const chapterKey = utils_1.pad(index + 1 + "", 3);
+        const chapterPath = `${bookPath}/ch${chapterKey}.${hash}.json`;
+        chaptersHashes.push(hash);
         try {
-            yield fs.writeFile(chapterPath, JSON.stringify(chapter));
+            yield fs.writeFile(chapterPath, payload);
         }
         catch (err) {
-            console.error("Error writing file: ", err);
+            console.error(`Error writing file ${chapterPath}: `, err);
         }
         index++;
     }
+    // Write hashfile for whole book folder
+    const bookPayload = JSON.stringify(chaptersHashes);
+    const bookHash = utils_1.getHash(bookPayload);
+    const bookHashfilePath = `${bookPath}/hashfile.${bookHash}.json`;
+    try {
+        yield fs.writeFile(bookHashfilePath, bookPayload);
+    }
+    catch (err) {
+        console.error(`Error writing book hashfile for ${bookPath}: `, err);
+    }
+    return bookHash;
 });
 exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+    const booksHashes = {};
     const bookAliases = Object.keys(bibleObj.books);
     for (let i = 0; i < bookAliases.length; i++) {
         const bookAlias = bookAliases[i];
@@ -31,42 +48,63 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(t
         yield fs
             .mkdirp(bookPath)
             .then(() => exports.writeChapters(bookPath, bibleObj.books[bookAlias]))
+            .then(bookHash => {
+            booksHashes[bookAlias] = bookHash;
+        })
             .catch(err => {
             if (err.code === "EEXIST") {
-                return exports.writeChapters(bookPath, bibleObj.books[bookAlias]);
+                exports.writeChapters(bookPath, bibleObj.books[bookAlias]).then(bookHash => {
+                    booksHashes[bookAlias] = bookHash;
+                });
             }
             console.error("Error creating book folder: ", err);
-            return err;
         });
         if (updateProgress) {
             updateProgress((i + 1) / bookAliases.length, "Writing JSON files of " + bookAlias);
         }
     }
+    // Write hashfile for whole book folder
+    const booksHashesPayload = JSON.stringify(booksHashes);
+    const booksHashesHash = utils_1.getHash(booksHashesPayload);
+    const booksHashesHashfilePath = `${outputPath}/booksHashes.${booksHashesHash}.json`;
+    try {
+        yield fs.writeFile(booksHashesHashfilePath, booksHashesPayload);
+    }
+    catch (err) {
+        console.error(`Error writing book hashfile for ${booksHashesHashfilePath}: `, err);
+    }
+    return booksHashes;
 });
 exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+    let booksHashes;
     try {
         yield fs.mkdirp(outputPath);
-        yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
+        booksHashes = yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
     }
     catch (err) {
         if (err.code === "EEXIST") {
-            return exports.writeBookFolders(outputPath, bibleObj, updateProgress);
+            booksHashes = exports.writeBookFolders(outputPath, bibleObj, updateProgress);
         }
         else {
-            console.error("Error creating book folder: ", err);
+            console.error("Error creating book folders: ", err);
         }
     }
+    const v11nPayload = JSON.stringify(bibleObj.v11n);
+    const v11nHash = utils_1.getHash(v11nPayload);
     try {
-        fs.writeFile(`${outputPath}/v11n.json`, JSON.stringify(bibleObj.v11n));
+        fs.writeFile(`${outputPath}/v11n.${v11nHash}.json`, v11nPayload);
     }
     catch (err) {
         console.error("Error writing v11n file: ", err);
     }
+    return booksHashes;
 });
 exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
+    const all = JSON.stringify(bibleObj);
+    const hash = utils_1.getHash(all);
     try {
         yield fs.mkdirp(outputPath);
-        yield fs.writeFile(`${outputPath}/all.json`, JSON.stringify(bibleObj));
+        yield fs.writeFile(`${outputPath}/all.${hash}.json`, all);
     }
     catch (err) {
         console.error("Error writing one complete JSON file: ", err);
@@ -77,7 +115,7 @@ exports.generate = (outputPath, bibleObj, updateProgress) => __awaiter(this, voi
         updateProgress(0, "Writing one JSON file");
     }
     yield exports.toOneJSONFile(outputPath, bibleObj);
-    yield exports.splitByChapters(outputPath, bibleObj, updateProgress);
+    return exports.splitByChapters(outputPath, bibleObj, updateProgress);
 });
 exports.default = {
     generate: exports.generate,

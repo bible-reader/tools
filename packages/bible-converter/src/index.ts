@@ -9,3 +9,4 @@ export const getParser: (format: string) => ParserFunc = (format: string) => {
 };
 
 export { generate } from "./main";
+export { getHash } from "./utils";

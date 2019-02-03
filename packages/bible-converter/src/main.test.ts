@@ -26,7 +26,10 @@ describe("generate()", () => {
         expect(bibleObj.name).toEqual(testFilePath);
         return generate(outputPath, bibleObj);
       })
-      .then(() => {
+      .then(booksHashes => {
+        expect(JSON.stringify(booksHashes)).toBe(
+          '{"gen":"65bd48","exo":"e22dea","lev":"bbdf85","num":"bbdf85","deu":"bbdf85"}'
+        );
         done();
       })
       .catch(err => {
