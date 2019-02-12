@@ -5,14 +5,18 @@ import { BibleVersionContent, Book } from "@bible-reader/types";
 
 type Hash = string;
 
-interface BooksHashes {
+export interface BooksHashes {
   [bookId: string]: Hash;
+}
+
+export interface ChaptersHashes {
+  [bookId: string]: Hash[]; // array of hashes corresponding to chapters
 }
 
 export const writeChapters = async (
   bookPath: string,
   bookObj: Book
-): Promise<Hash> => {
+): Promise<{ book: Hash; chapters: Hash[] }> => {
   let index = 0;
   const chaptersHashes = [];
   for (const chapter of bookObj.chapters) {
@@ -37,7 +41,10 @@ export const writeChapters = async (
   } catch (err) {
     console.error(`Error writing book hashfile for ${bookPath}: `, err);
   }
-  return bookHash;
+  return {
+    book: bookHash,
+    chapters: chaptersHashes
+  };
 };
 
 export const writeBookFolders = async (
@@ -46,6 +53,7 @@ export const writeBookFolders = async (
   updateProgress?: (progress: number, message: string) => void
 ) => {
   const booksHashes: BooksHashes = {};
+  const chaptersHashes: ChaptersHashes = {};
   const bookAliases = Object.keys(bibleObj.books);
   for (let i = 0; i < bookAliases.length; i++) {
     const bookAlias = bookAliases[i];
@@ -53,14 +61,18 @@ export const writeBookFolders = async (
     await fs
       .mkdirp(bookPath)
       .then(() => writeChapters(bookPath, bibleObj.books[bookAlias]))
-      .then(bookHash => {
-        booksHashes[bookAlias] = bookHash;
+      .then(({ book, chapters }) => {
+        booksHashes[bookAlias] = book;
+        chaptersHashes[bookAlias] = chapters;
       })
       .catch(err => {
         if (err.code === "EEXIST") {
-          writeChapters(bookPath, bibleObj.books[bookAlias]).then(bookHash => {
-            booksHashes[bookAlias] = bookHash;
-          });
+          writeChapters(bookPath, bibleObj.books[bookAlias]).then(
+            ({ book, chapters }) => {
+              booksHashes[bookAlias] = book;
+              chaptersHashes[bookAlias] = chapters;
+            }
+          );
         }
         console.error("Error creating book folder: ", err);
       });
@@ -83,7 +95,10 @@ export const writeBookFolders = async (
       err
     );
   }
-  return booksHashes;
+  return {
+    booksHashes,
+    chaptersHashes
+  };
 };
 
 export const splitByChapters = async (
@@ -91,13 +106,13 @@ export const splitByChapters = async (
   bibleObj: BibleVersionContent,
   updateProgress?: (progress: number, message: string) => void
 ) => {
-  let booksHashes;
+  let hashes;
   try {
     await fs.mkdirp(outputPath);
-    booksHashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
+    hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
   } catch (err) {
     if (err.code === "EEXIST") {
-      booksHashes = writeBookFolders(outputPath, bibleObj, updateProgress);
+      hashes = writeBookFolders(outputPath, bibleObj, updateProgress);
     } else {
       console.error("Error creating book folders: ", err);
     }
@@ -109,7 +124,7 @@ export const splitByChapters = async (
   } catch (err) {
     console.error("Error writing v11n file: ", err);
   }
-  return booksHashes;
+  return hashes;
 };
 
 export const toOneJSONFile = async (

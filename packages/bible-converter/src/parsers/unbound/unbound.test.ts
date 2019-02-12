@@ -8,7 +8,7 @@ import { BibleVersionContent } from "@bible-reader/types";
 describe("Unbound Bible format parser", () => {
   it("should read file and parse it into object", done => {
     const testFilePath = path.join(__dirname, "czech_bkr_utf8_sample.txt");
-    const name = testFilePath;
+    const name = "czech_bkr_utf8_sample";
 
     fs
       .readFile(testFilePath, "utf8")
@@ -16,7 +16,7 @@ describe("Unbound Bible format parser", () => {
       .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj).toMatchSnapshot();
 
-        expect(bibleObj.name).toEqual(testFilePath);
+        expect(bibleObj.name).toEqual(name);
 
         const books = bibleObj.books;
         // expect(Object.keys(books).length).toEqual(5);

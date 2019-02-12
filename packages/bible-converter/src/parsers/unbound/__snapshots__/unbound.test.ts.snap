@@ -3120,7 +3120,7 @@ Object {
   },
   "id": "bkr",
   "lang": "cz",
-  "name": "/Users/pst/code/github/bible-reader/tools/packages/bible-converter/src/parsers/unbound/czech_bkr_utf8_sample.txt",
+  "name": "czech_bkr_utf8_sample",
   "v11n": Object {
     "exo": Array [
       22,

@@ -1214,7 +1214,7 @@ Object {
   },
   "id": "kjv",
   "lang": "en",
-  "name": "/Users/pst/code/github/bible-reader/tools/packages/bible-converter/src/parsers/opensong/KJV_test_sample.xmm",
+  "name": "KJV_test_sample",
   "v11n": Object {
     "deu": Array [
       1,

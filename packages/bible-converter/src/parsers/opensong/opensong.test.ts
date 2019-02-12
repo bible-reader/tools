@@ -9,13 +9,13 @@ import { defaultNTBooks, defaultOTBooks } from "./defaultBookLists";
 describe("OpenSong Bible format parser", () => {
   it("should read file and parse it into object", done => {
     const testFilePath = path.join(__dirname, "KJV_test_sample.xmm");
-    const name = testFilePath;
+    const name = "KJV_test_sample";
 
     fs
       .readFile(testFilePath, "utf8")
       .then(data => parse(data, "kjv", name, "en"))
       .then((bibleObj: BibleVersionContent) => {
-        expect(bibleObj.name).toEqual(testFilePath);
+        expect(bibleObj.name).toEqual(name);
 
         const books = bibleObj.books;
 

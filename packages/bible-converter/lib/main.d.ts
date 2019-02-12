@@ -1,18 +1,45 @@
 import { BibleVersionContent, Book } from "@bible-reader/types";
 declare type Hash = string;
-interface BooksHashes {
+export interface BooksHashes {
     [bookId: string]: Hash;
 }
-export declare const writeChapters: (bookPath: string, bookObj: Book) => Promise<string>;
-export declare const writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes>;
-export declare const splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes | undefined>;
+export interface ChaptersHashes {
+    [bookId: string]: Hash[];
+}
+export declare const writeChapters: (bookPath: string, bookObj: Book) => Promise<{
+    book: string;
+    chapters: string[];
+}>;
+export declare const writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+    booksHashes: BooksHashes;
+    chaptersHashes: ChaptersHashes;
+}>;
+export declare const splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+    booksHashes: BooksHashes;
+    chaptersHashes: ChaptersHashes;
+} | undefined>;
 export declare const toOneJSONFile: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;
-export declare const generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes | undefined>;
+export declare const generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+    booksHashes: BooksHashes;
+    chaptersHashes: ChaptersHashes;
+} | undefined>;
 declare const _default: {
-    generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes | undefined>;
+    generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+        booksHashes: BooksHashes;
+        chaptersHashes: ChaptersHashes;
+    } | undefined>;
     toOneJSONFile: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;
-    splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes | undefined>;
-    writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<BooksHashes>;
-    writeChapters: (bookPath: string, bookObj: Book) => Promise<string>;
+    splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+        booksHashes: BooksHashes;
+        chaptersHashes: ChaptersHashes;
+    } | undefined>;
+    writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
+        booksHashes: BooksHashes;
+        chaptersHashes: ChaptersHashes;
+    }>;
+    writeChapters: (bookPath: string, bookObj: Book) => Promise<{
+        book: string;
+        chapters: string[];
+    }>;
 };
 export default _default;
