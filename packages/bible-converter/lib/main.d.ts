@@ -14,25 +14,13 @@ export declare const writeBookFolders: (outputPath: string, bibleObj: BibleVersi
     booksHashes: BooksHashes;
     chaptersHashes: ChaptersHashes;
 }>;
-export declare const splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
-    booksHashes: BooksHashes;
-    chaptersHashes: ChaptersHashes;
-} | undefined>;
+export declare const splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<string>;
 export declare const toOneJSONFile: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;
-export declare const generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
-    booksHashes: BooksHashes;
-    chaptersHashes: ChaptersHashes;
-} | undefined>;
+export declare const generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<string>;
 declare const _default: {
-    generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
-        booksHashes: BooksHashes;
-        chaptersHashes: ChaptersHashes;
-    } | undefined>;
+    generate: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<string>;
     toOneJSONFile: (outputPath: string, bibleObj: BibleVersionContent) => Promise<void>;
-    splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
-        booksHashes: BooksHashes;
-        chaptersHashes: ChaptersHashes;
-    } | undefined>;
+    splitByChapters: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<string>;
     writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
         booksHashes: BooksHashes;
         chaptersHashes: ChaptersHashes;

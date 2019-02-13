@@ -83,18 +83,6 @@ export const writeBookFolders = async (
       );
     }
   }
-  // Write hashfile for whole book folder
-  const booksHashesPayload = JSON.stringify(booksHashes);
-  const booksHashesHash = getHash(booksHashesPayload);
-  const booksHashesHashfilePath = `${outputPath}/booksHashes.${booksHashesHash}.json`;
-  try {
-    await fs.writeFile(booksHashesHashfilePath, booksHashesPayload);
-  } catch (err) {
-    console.error(
-      `Error writing book hashfile for ${booksHashesHashfilePath}: `,
-      err
-    );
-  }
   return {
     booksHashes,
     chaptersHashes
@@ -107,16 +95,34 @@ export const splitByChapters = async (
   updateProgress?: (progress: number, message: string) => void
 ) => {
   let hashes;
+  let descriptorHash = "";
   try {
     await fs.mkdirp(outputPath);
     hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
   } catch (err) {
     if (err.code === "EEXIST") {
-      hashes = writeBookFolders(outputPath, bibleObj, updateProgress);
+      hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
     } else {
       console.error("Error creating book folders: ", err);
     }
   }
+  if (hashes) {
+    // Write descriptor - the file of all hashes and v11n
+    const descriptor = {
+      v11n: bibleObj.v11n,
+      chapters: hashes.chaptersHashes,
+      books: hashes.booksHashes
+    };
+    const descriptorPayload = JSON.stringify(descriptor);
+    descriptorHash = getHash(descriptorPayload);
+    const descriptorPath = `${outputPath}/descriptor.${descriptorHash}.json`;
+    try {
+      await fs.writeFile(descriptorPath, descriptorPayload);
+    } catch (err) {
+      console.error(`Error writing book hashfile for ${descriptorPath}: `, err);
+    }
+  }
+
   const v11nPayload = JSON.stringify(bibleObj.v11n);
   const v11nHash = getHash(v11nPayload);
   try {
@@ -124,7 +130,7 @@ export const splitByChapters = async (
   } catch (err) {
     console.error("Error writing v11n file: ", err);
   }
-  return hashes;
+  return descriptorHash;
 };
 
 export const toOneJSONFile = async (

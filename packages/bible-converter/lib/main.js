@@ -69,16 +69,6 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(t
             updateProgress((i + 1) / bookAliases.length, "Writing JSON files of " + bookAlias);
         }
     }
-    // Write hashfile for whole book folder
-    const booksHashesPayload = JSON.stringify(booksHashes);
-    const booksHashesHash = utils_1.getHash(booksHashesPayload);
-    const booksHashesHashfilePath = `${outputPath}/booksHashes.${booksHashesHash}.json`;
-    try {
-        yield fs.writeFile(booksHashesHashfilePath, booksHashesPayload);
-    }
-    catch (err) {
-        console.error(`Error writing book hashfile for ${booksHashesHashfilePath}: `, err);
-    }
     return {
         booksHashes,
         chaptersHashes
@@ -86,16 +76,34 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(t
 });
 exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
     let hashes;
+    let descriptorHash = "";
     try {
         yield fs.mkdirp(outputPath);
         hashes = yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
     }
     catch (err) {
         if (err.code === "EEXIST") {
-            hashes = exports.writeBookFolders(outputPath, bibleObj, updateProgress);
+            hashes = yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
         }
         else {
             console.error("Error creating book folders: ", err);
+        }
+    }
+    if (hashes) {
+        // Write descriptor - the file of all hashes and v11n
+        const descriptor = {
+            v11n: bibleObj.v11n,
+            chapters: hashes.chaptersHashes,
+            books: hashes.booksHashes
+        };
+        const descriptorPayload = JSON.stringify(descriptor);
+        descriptorHash = utils_1.getHash(descriptorPayload);
+        const descriptorPath = `${outputPath}/descriptor.${descriptorHash}.json`;
+        try {
+            yield fs.writeFile(descriptorPath, descriptorPayload);
+        }
+        catch (err) {
+            console.error(`Error writing book hashfile for ${descriptorPath}: `, err);
         }
     }
     const v11nPayload = JSON.stringify(bibleObj.v11n);
@@ -106,7 +114,7 @@ exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(th
     catch (err) {
         console.error("Error writing v11n file: ", err);
     }
-    return hashes;
+    return descriptorHash;
 });
 exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
     const all = JSON.stringify(bibleObj);
