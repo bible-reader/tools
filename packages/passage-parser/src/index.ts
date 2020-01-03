@@ -18,11 +18,16 @@ function parsePassage(
   passage.bookNameShort = bookNameShort;
   passage.bookNumber = bookNumbers[bookNameShort];
 
+  if (passageString.indexOf(",") !== -1) {
+    // passageString contains ","
+    passageString = passageString.replace(new RegExp(",", "g"), ":");
+  }
+
   const isOneChapterBook = oneChapterBooks.indexOf(passage.bookNumber) >= 0;
 
   const passageParts = passageString.split("-");
   const passageStart = passageParts[0].trim();
-  const passageStartParts = passageStart.split(",");
+  const passageStartParts = passageStart.split(":");
 
   // Parsing first part (before "-")
   if (passageStartParts.length > 1) {
@@ -48,7 +53,7 @@ function parsePassage(
   // Parsing second part (after "-")
   if (passageParts.length > 1) {
     const passageEnd = passageParts[1].trim();
-    const passageEndParts = passageEnd.split(",");
+    const passageEndParts = passageEnd.split(":");
     if (passageEndParts.length == 1) {
       if (passageStartParts.length === 1) {
         if (isOneChapterBook) {

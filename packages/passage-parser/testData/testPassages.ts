@@ -12,8 +12,32 @@ export default [
     }
   },
   {
+    book: "gen",
+    passage: "1:1-2", // colon here
+    expected: {
+      bookNameShort: "gen",
+      bookNumber: 1,
+      startChapter: 1,
+      startVerse: 1,
+      endChapter: 1,
+      endVerse: 2
+    }
+  },
+  {
     book: "exo",
     passage: "4,3-5,5",
+    expected: {
+      bookNameShort: "exo",
+      bookNumber: 2,
+      startChapter: 4,
+      startVerse: 3,
+      endChapter: 5,
+      endVerse: 5
+    }
+  },
+  {
+    book: "exo",
+    passage: "4:3-5:5", // colon here
     expected: {
       bookNameShort: "exo",
       bookNumber: 2,
