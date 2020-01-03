@@ -118,5 +118,29 @@ export default [
       endChapter: 1,
       endVerse: 2
     }
+  },
+  {
+    book: "deu",
+    passage: "5:3-e", // to the end of the chapter
+    expected: {
+      bookNameShort: "deu",
+      bookNumber: 5,
+      startChapter: 5,
+      startVerse: 3,
+      endChapter: 5,
+      endVerse: 33
+    }
+  },
+  {
+    book: "deu",
+    passage: "5-10:e", // to the end of the chapter
+    expected: {
+      bookNameShort: "deu",
+      bookNumber: 5,
+      startChapter: 5,
+      startVerse: 1,
+      endChapter: 10,
+      endVerse: 22
+    }
   }
 ];
