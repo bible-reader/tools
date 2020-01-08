@@ -1,4 +1,4 @@
-import * as fs from "fs-promise";
+import { promises as fs } from "fs";
 import { pad, getHash } from "./utils";
 
 import { BibleVersionContent, Book } from "@bible-reader/types";
@@ -59,7 +59,7 @@ export const writeBookFolders = async (
     const bookAlias = bookAliases[i];
     const bookPath = `${outputPath}/${bookAlias}`;
     await fs
-      .mkdirp(bookPath)
+      .mkdir(bookPath, { recursive: true })
       .then(() => writeChapters(bookPath, bibleObj.books[bookAlias]))
       .then(({ book, chapters }) => {
         booksHashes[bookAlias] = book;
@@ -97,7 +97,7 @@ export const splitByChapters = async (
   let hashes;
   let descriptorHash = "";
   try {
-    await fs.mkdirp(outputPath);
+    await fs.mkdir(outputPath, { recursive: true });
     hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
   } catch (err) {
     if (err.code === "EEXIST") {
@@ -140,7 +140,7 @@ export const toOneJSONFile = async (
   const all = JSON.stringify(bibleObj);
   const hash = getHash(all);
   try {
-    await fs.mkdirp(outputPath);
+    await fs.mkdir(outputPath, { recursive: true });
     await fs.writeFile(`${outputPath}/all.${hash}.json`, all);
   } catch (err) {
     console.error("Error writing one complete JSON file: ", err);

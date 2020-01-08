@@ -27,10 +27,8 @@
   "dependencies": {
     "@bible-reader/common": "^2.0.0",
     "@bible-reader/types": "^2.0.0",
-    "@types/fs-promise": "^1.0.3",
-    "@types/node": "^8.0.2",
+    "@types/node": "^13.1.4",
     "@types/xml-parser": "^1.2.28",
-    "fs-promise": "^1.0.0",
     "xml-parser": "^1.2.1"
   },
   "devDependencies": {

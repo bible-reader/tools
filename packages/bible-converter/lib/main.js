@@ -1,16 +1,17 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs-promise");
+const fs_1 = require("fs");
 const utils_1 = require("./utils");
-exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, function* () {
+exports.writeChapters = (bookPath, bookObj) => __awaiter(void 0, void 0, void 0, function* () {
     let index = 0;
     const chaptersHashes = [];
     for (const chapter of bookObj.chapters) {
@@ -20,7 +21,7 @@ exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, f
         const chapterPath = `${bookPath}/ch${chapterKey}.${hash}.json`;
         chaptersHashes.push(hash);
         try {
-            yield fs.writeFile(chapterPath, payload);
+            yield fs_1.promises.writeFile(chapterPath, payload);
         }
         catch (err) {
             console.error(`Error writing file ${chapterPath}: `, err);
@@ -32,7 +33,7 @@ exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, f
     const bookHash = utils_1.getHash(bookPayload);
     const bookHashfilePath = `${bookPath}/hashfile.${bookHash}.json`;
     try {
-        yield fs.writeFile(bookHashfilePath, bookPayload);
+        yield fs_1.promises.writeFile(bookHashfilePath, bookPayload);
     }
     catch (err) {
         console.error(`Error writing book hashfile for ${bookPath}: `, err);
@@ -42,15 +43,15 @@ exports.writeChapters = (bookPath, bookObj) => __awaiter(this, void 0, void 0, f
         chapters: chaptersHashes
     };
 });
-exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     const booksHashes = {};
     const chaptersHashes = {};
     const bookAliases = Object.keys(bibleObj.books);
     for (let i = 0; i < bookAliases.length; i++) {
         const bookAlias = bookAliases[i];
         const bookPath = `${outputPath}/${bookAlias}`;
-        yield fs
-            .mkdirp(bookPath)
+        yield fs_1.promises
+            .mkdir(bookPath, { recursive: true })
             .then(() => exports.writeChapters(bookPath, bibleObj.books[bookAlias]))
             .then(({ book, chapters }) => {
             booksHashes[bookAlias] = book;
@@ -74,11 +75,11 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(t
         chaptersHashes
     };
 });
-exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     let hashes;
     let descriptorHash = "";
     try {
-        yield fs.mkdirp(outputPath);
+        yield fs_1.promises.mkdir(outputPath, { recursive: true });
         hashes = yield exports.writeBookFolders(outputPath, bibleObj, updateProgress);
     }
     catch (err) {
@@ -100,7 +101,7 @@ exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(th
         descriptorHash = utils_1.getHash(descriptorPayload);
         const descriptorPath = `${outputPath}/descriptor.${descriptorHash}.json`;
         try {
-            yield fs.writeFile(descriptorPath, descriptorPayload);
+            yield fs_1.promises.writeFile(descriptorPath, descriptorPayload);
         }
         catch (err) {
             console.error(`Error writing book hashfile for ${descriptorPath}: `, err);
@@ -109,25 +110,25 @@ exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(th
     const v11nPayload = JSON.stringify(bibleObj.v11n);
     const v11nHash = utils_1.getHash(v11nPayload);
     try {
-        fs.writeFile(`${outputPath}/v11n.${v11nHash}.json`, v11nPayload);
+        fs_1.promises.writeFile(`${outputPath}/v11n.${v11nHash}.json`, v11nPayload);
     }
     catch (err) {
         console.error("Error writing v11n file: ", err);
     }
     return descriptorHash;
 });
-exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(this, void 0, void 0, function* () {
+exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(void 0, void 0, void 0, function* () {
     const all = JSON.stringify(bibleObj);
     const hash = utils_1.getHash(all);
     try {
-        yield fs.mkdirp(outputPath);
-        yield fs.writeFile(`${outputPath}/all.${hash}.json`, all);
+        yield fs_1.promises.mkdir(outputPath, { recursive: true });
+        yield fs_1.promises.writeFile(`${outputPath}/all.${hash}.json`, all);
     }
     catch (err) {
         console.error("Error writing one complete JSON file: ", err);
     }
 });
-exports.generate = (outputPath, bibleObj, updateProgress) => __awaiter(this, void 0, void 0, function* () {
+exports.generate = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     if (updateProgress) {
         updateProgress(0, "Writing one JSON file");
     }

@@ -1,5 +1,5 @@
 import * as path from "path";
-import * as fs from "fs-promise";
+import { promises as fs } from "fs";
 
 import parse from "./parsers/opensong";
 import { generate } from "./main";
@@ -19,8 +19,7 @@ describe("generate()", () => {
       "testTmp/output/KJV_test_sample"
     );
 
-    fs
-      .readFile(testFilePath, "utf8")
+    fs.readFile(testFilePath, "utf8")
       .then(data => parse(data, "kjv", name, "en"))
       .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj.name).toEqual(testFilePath);

@@ -1,5 +1,5 @@
 import * as path from "path";
-import * as fs from "fs-promise";
+import { promises as fs } from "fs";
 
 import { BibleVersionContent } from "@bible-reader/types";
 
@@ -11,8 +11,7 @@ describe("OpenSong Bible format parser", () => {
     const testFilePath = path.join(__dirname, "KJV_test_sample.xmm");
     const name = "KJV_test_sample";
 
-    fs
-      .readFile(testFilePath, "utf8")
+    fs.readFile(testFilePath, "utf8")
       .then(data => parse(data, "kjv", name, "en"))
       .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj.name).toEqual(name);

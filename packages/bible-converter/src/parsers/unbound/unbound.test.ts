@@ -1,5 +1,5 @@
 import * as path from "path";
-import * as fs from "fs-promise";
+import { promises as fs } from "fs";
 
 import parse from ".";
 
@@ -10,8 +10,7 @@ describe("Unbound Bible format parser", () => {
     const testFilePath = path.join(__dirname, "czech_bkr_utf8_sample.txt");
     const name = "czech_bkr_utf8_sample";
 
-    fs
-      .readFile(testFilePath, "utf8")
+    fs.readFile(testFilePath, "utf8")
       .then(data => parse(data, "bkr", name, "cz"))
       .then((bibleObj: BibleVersionContent) => {
         expect(bibleObj).toMatchSnapshot();
