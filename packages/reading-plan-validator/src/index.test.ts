@@ -1,5 +1,5 @@
 import * as path from "path";
-import { fs } from "mz";
+import { promises as fs } from "fs";
 
 import { Passage } from "@bible-reader/types";
 import parsePassage from "@bible-reader/passage-parser";

@@ -12,10 +12,14 @@ function parsePassage(v11n, bookNameShort, passageString) {
     };
     passage.bookNameShort = bookNameShort;
     passage.bookNumber = common_1.bookNumbers[bookNameShort];
+    if (passageString.indexOf(",") !== -1) {
+        // passageString contains ","
+        passageString = passageString.replace(new RegExp(",", "g"), ":");
+    }
     const isOneChapterBook = common_1.oneChapterBooks.indexOf(passage.bookNumber) >= 0;
     const passageParts = passageString.split("-");
     const passageStart = passageParts[0].trim();
-    const passageStartParts = passageStart.split(",");
+    const passageStartParts = passageStart.split(":");
     // Parsing first part (before "-")
     if (passageStartParts.length > 1) {
         // Chapter and verse were specified
@@ -40,7 +44,7 @@ function parsePassage(v11n, bookNameShort, passageString) {
     // Parsing second part (after "-")
     if (passageParts.length > 1) {
         const passageEnd = passageParts[1].trim();
-        const passageEndParts = passageEnd.split(",");
+        const passageEndParts = passageEnd.split(":");
         if (passageEndParts.length == 1) {
             if (passageStartParts.length === 1) {
                 if (isOneChapterBook) {
@@ -56,12 +60,25 @@ function parsePassage(v11n, bookNameShort, passageString) {
             }
             else {
                 passage.endChapter = passage.startChapter;
-                passage.endVerse = parseInt(passageEndParts[0].trim());
+                if (passageEndParts[0].indexOf("e") !== -1) {
+                    // passageString contains "e" - meaning "to the end of the chapter"
+                    passage.endVerse =
+                        v11n[passage.bookNameShort][passage.endChapter - 1];
+                }
+                else {
+                    passage.endVerse = parseInt(passageEndParts[0].trim());
+                }
             }
         }
         else if (passageEndParts.length == 2) {
             passage.endChapter = parseInt(passageEndParts[0].trim());
-            passage.endVerse = parseInt(passageEndParts[1].trim());
+            if (passageEndParts[1].indexOf("e") !== -1) {
+                // passageString contains "e" - meaning "to the end of the chapter"
+                passage.endVerse = v11n[passage.bookNameShort][passage.endChapter - 1];
+            }
+            else {
+                passage.endVerse = parseInt(passageEndParts[1].trim());
+            }
             if (isOneChapterBook && passage.endChapter > 1) {
                 passage.invalidRef = true;
                 passage.invalidRefMessage = "INVALID_REF_BOOK_HAS_ONLY_ONE_CHAPTER";

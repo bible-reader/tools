@@ -31,9 +31,7 @@
     "@bible-reader/passage-parser": "^2.0.0",
     "@bible-reader/types": "^2.0.0",
     "@bible-reader/v11n-utils": "^2.0.0",
-    "@types/mz": "^0.0.32",
-    "@types/node": "^8.0.47",
-    "mz": "^2.7.0"
+    "@types/node": "^13.1.4"
   },
   "devDependencies": {
     "@types/jest": "^22.0.1",
