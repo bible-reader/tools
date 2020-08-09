@@ -3,7 +3,7 @@
 ## How to use
 
 ```typescript
-import { getNextChapter, chapterExists } from "@bible-reader/common";
+import { getNextChapter, chapterExists } from "@bible-reader/v11n-utils";
 import v11n from "../testData/kjvV11n";
 
 const currentChapter = { book: "gen", chapter: 1 };
