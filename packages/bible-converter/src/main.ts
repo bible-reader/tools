@@ -65,7 +65,7 @@ export const writeBookFolders = async (
         booksHashes[bookAlias] = book;
         chaptersHashes[bookAlias] = chapters;
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.code === "EEXIST") {
           writeChapters(bookPath, bibleObj.books[bookAlias]).then(
             ({ book, chapters }) => {

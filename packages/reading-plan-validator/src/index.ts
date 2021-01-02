@@ -10,13 +10,13 @@ type Error = {
 function validateReadingPlan(
   passages: Array<Passage>,
   versification: Versification,
-  checkContinuity: boolean = true
+  checkContinuity = true
 ) {
   const errors: Array<Error> = [];
 
   let i = 0;
 
-  for (let passage of passages) {
+  for (const passage of passages) {
     const error: Error = {
       passageIndex: i,
       isError: false,

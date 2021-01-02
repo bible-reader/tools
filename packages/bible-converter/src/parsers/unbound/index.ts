@@ -23,7 +23,7 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   let verseIndex = -1;
   let textIndex = -1;
 
-  lines.forEach(line => {
+  lines.forEach((line) => {
     const normalLine = line.trim();
 
     if (normalLine.length > 0 && normalLine.indexOf("#columns") === 0) {
@@ -90,9 +90,9 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   });
 
   // V11n (versification): number of verses for each chapter
-  Object.keys(bibleObj.v11n).forEach(bookSlug => {
+  Object.keys(bibleObj.v11n).forEach((bookSlug) => {
     bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map(
-      chapter => chapter.verses.length
+      (chapter) => chapter.verses.length
     );
   });
 

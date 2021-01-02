@@ -16,7 +16,7 @@ async function readData() {
     const rows = data.toString().split("\n");
     const passages: Array<Passage> = [];
     const dates: string[] = [];
-    for (let row of rows) {
+    for (const row of rows) {
       const fields = row.split("#");
       dates[i] = fields[0].trim();
       passages[i] = parsePassage(v11n, fields[1].trim(), fields[2].trim());

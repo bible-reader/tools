@@ -48,10 +48,10 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
   let otBooks: BookList | undefined;
   let ntBooks: BookList | undefined;
 
-  children.forEach(child => {
+  children.forEach((child) => {
     if (child.name === "OT") {
       otBooks = {};
-      child.children.forEach(item => {
+      child.children.forEach((item) => {
         if (otIndex < NUM_BOOKS_OT && otBooks) {
           otBooks[item.attributes.n] = otIndex;
           otIndex++;
@@ -60,7 +60,7 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     }
     if (child.name === "NT") {
       ntBooks = {};
-      child.children.forEach(item => {
+      child.children.forEach((item) => {
         if (ntIndex < NUM_BOOKS_NT && ntBooks) {
           ntBooks[item.attributes.n] = ntIndex;
           ntIndex++;
@@ -85,16 +85,16 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     };
     bibleObj.books[booksOrder[index]].chapters = book.children
       .filter(isChapter)
-      .map(chapter => ({
+      .map((chapter) => ({
         verses: chapter.children
           .filter(isVerse)
-          .map(verse => verse.content || "")
+          .map((verse) => verse.content || "")
       }));
 
     // V11n (versification): number of verses for each chapter
     bibleObj.v11n[booksOrder[index]] = book.children
       .filter(isChapter)
-      .map(chapter => chapter.children.filter(isVerse).length);
+      .map((chapter) => chapter.children.filter(isVerse).length);
 
     if (updateProgress) {
       // progress is current book index / number of all books (66)
