@@ -36,7 +36,6 @@
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "jest": "^26.6.3",
-    "prettier": "^1.7.4",
     "ts-jest": "^26.4.4",
     "ts-node": "^3.3.0",
     "typescript": "^3.1.6"
