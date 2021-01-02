@@ -14,7 +14,8 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     name,
     lang,
     books: {},
-    v11n: {}
+    v11n: {},
+    fragments: {}
   };
 
   // Indexes of tab-separated columns initialized
@@ -69,6 +70,7 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
             chapters: []
           };
           bibleObj.v11n[booksOrder[bookNumber - 1]] = [];
+          bibleObj.fragments[booksOrder[bookNumber - 1]] = [];
 
           if (updateProgress) {
             updateProgress(bookNumber / 66, booksOrder[bookNumber - 1]);
@@ -89,10 +91,19 @@ const parse: ParserFunc = (data, id, name, lang, updateProgress) => {
     }
   });
 
-  // V11n (versification): number of verses for each chapter
   Object.keys(bibleObj.v11n).forEach((bookSlug) => {
+    // V11n (versification): number of verses for each chapter
     bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map(
       (chapter) => chapter.verses.length
+    );
+
+    // Fragments - number of verses (or fragments of verses) up to the current chapter
+    bibleObj.fragments[bookSlug] = bibleObj.v11n[bookSlug].reduce(
+      (previous: number[], current, currentIndex) => [
+        ...previous,
+        currentIndex === 0 ? current : current + previous[currentIndex - 1]
+      ],
+      []
     );
   });
 

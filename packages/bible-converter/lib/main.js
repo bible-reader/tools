@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.generate = exports.toOneJSONFile = exports.splitByChapters = exports.writeBookFolders = exports.writeChapters = void 0;
 const fs_1 = require("fs");
 const utils_1 = require("./utils");
 exports.writeChapters = (bookPath, bookObj) => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,7 +58,7 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(v
             booksHashes[bookAlias] = book;
             chaptersHashes[bookAlias] = chapters;
         })
-            .catch(err => {
+            .catch((err) => {
             if (err.code === "EEXIST") {
                 exports.writeChapters(bookPath, bibleObj.books[bookAlias]).then(({ book, chapters }) => {
                     booksHashes[bookAlias] = book;

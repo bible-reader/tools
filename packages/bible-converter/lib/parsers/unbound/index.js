@@ -11,14 +11,15 @@ const parse = (data, id, name, lang, updateProgress) => {
         name,
         lang,
         books: {},
-        v11n: {}
+        v11n: {},
+        fragments: {}
     };
     // Indexes of tab-separated columns initialized
     let bookIndex = -1;
     let chapterIndex = -1;
     let verseIndex = -1;
     let textIndex = -1;
-    lines.forEach(line => {
+    lines.forEach((line) => {
         const normalLine = line.trim();
         if (normalLine.length > 0 && normalLine.indexOf("#columns") === 0) {
             const lineParts = normalLine.split("\t");
@@ -58,6 +59,7 @@ const parse = (data, id, name, lang, updateProgress) => {
                         chapters: []
                     };
                     bibleObj.v11n[common_1.booksOrder[bookNumber - 1]] = [];
+                    bibleObj.fragments[common_1.booksOrder[bookNumber - 1]] = [];
                     if (updateProgress) {
                         updateProgress(bookNumber / 66, common_1.booksOrder[bookNumber - 1]);
                     }
@@ -74,9 +76,14 @@ const parse = (data, id, name, lang, updateProgress) => {
             }
         }
     });
-    // V11n (versification): number of verses for each chapter
-    Object.keys(bibleObj.v11n).forEach(bookSlug => {
-        bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map(chapter => chapter.verses.length);
+    Object.keys(bibleObj.v11n).forEach((bookSlug) => {
+        // V11n (versification): number of verses for each chapter
+        bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map((chapter) => chapter.verses.length);
+        // Fragments - number of verses (or fragments of verses) up to the current chapter
+        bibleObj.fragments[bookSlug] = bibleObj.v11n[bookSlug].reduce((previous, current, currentIndex) => [
+            ...previous,
+            currentIndex === 0 ? current : current + previous[currentIndex - 1]
+        ], []);
     });
     return bibleObj;
 };
