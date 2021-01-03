@@ -25,7 +25,7 @@ const parse = (data, id, name, lang, updateProgress) => {
         lang,
         books: {},
         v11n: {},
-        fragments: {}
+        fragmentNumbers: {}
     };
     let otIndex = 0;
     let ntIndex = 0;
@@ -67,16 +67,16 @@ const parse = (data, id, name, lang, updateProgress) => {
         bibleObj.books[bookID].chapters = book.children
             .filter(exports.isChapter)
             .map((chapter) => ({
-            verses: chapter.children
+            fragments: chapter.children
                 .filter(exports.isVerse)
-                .map((verse) => verse.content || "")
+                .map((verse, index) => ({ v: index + 1, t: verse.content || "" }))
         }));
         // V11n (versification): number of verses for each chapter
         bibleObj.v11n[bookID] = book.children
             .filter(exports.isChapter)
             .map((chapter) => chapter.children.filter(exports.isVerse).length);
         // Fragments - number of verses (or fragments of verses) up to the current chapter
-        bibleObj.fragments[bookID] = bibleObj.v11n[bookID].reduce((previous, current, currentIndex) => [
+        bibleObj.fragmentNumbers[bookID] = bibleObj.v11n[bookID].reduce((previous, current, currentIndex) => [
             ...previous,
             currentIndex === 0 ? current : current + previous[currentIndex - 1]
         ], []);

@@ -12,7 +12,7 @@ const parse = (data, id, name, lang, updateProgress) => {
         lang,
         books: {},
         v11n: {},
-        fragments: {}
+        fragmentNumbers: {}
     };
     // Indexes of tab-separated columns initialized
     let bookIndex = -1;
@@ -59,7 +59,7 @@ const parse = (data, id, name, lang, updateProgress) => {
                         chapters: []
                     };
                     bibleObj.v11n[common_1.booksOrder[bookNumber - 1]] = [];
-                    bibleObj.fragments[common_1.booksOrder[bookNumber - 1]] = [];
+                    bibleObj.fragmentNumbers[common_1.booksOrder[bookNumber - 1]] = [];
                     if (updateProgress) {
                         updateProgress(bookNumber / 66, common_1.booksOrder[bookNumber - 1]);
                     }
@@ -68,19 +68,19 @@ const parse = (data, id, name, lang, updateProgress) => {
                 // create chapter object if it does not exist
                 if (book.chapters[chapterNumber - 1] === undefined) {
                     book.chapters[chapterNumber - 1] = {
-                        verses: []
+                        fragments: []
                     };
                 }
                 const chapter = book.chapters[chapterNumber - 1];
-                chapter.verses[verseNumber - 1] = verseText;
+                chapter.fragments[verseNumber - 1] = { t: verseText, v: verseNumber };
             }
         }
     });
     Object.keys(bibleObj.v11n).forEach((bookSlug) => {
         // V11n (versification): number of verses for each chapter
-        bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map((chapter) => chapter.verses.length);
+        bibleObj.v11n[bookSlug] = bibleObj.books[bookSlug].chapters.map((chapter) => chapter.fragments.length);
         // Fragments - number of verses (or fragments of verses) up to the current chapter
-        bibleObj.fragments[bookSlug] = bibleObj.v11n[bookSlug].reduce((previous, current, currentIndex) => [
+        bibleObj.fragmentNumbers[bookSlug] = bibleObj.v11n[bookSlug].reduce((previous, current, currentIndex) => [
             ...previous,
             currentIndex === 0 ? current : current + previous[currentIndex - 1]
         ], []);
