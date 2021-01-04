@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.defaultNTBooks = exports.defaultOTBooks = void 0;
 exports.defaultOTBooks = {
     Genesis: 0,
     Exodus: 1,

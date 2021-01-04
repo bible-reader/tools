@@ -7,8 +7,8 @@ export interface ChaptersHashes {
     [bookId: string]: Hash[];
 }
 export declare const writeChapters: (bookPath: string, bookObj: Book) => Promise<{
-    book: string;
-    chapters: string[];
+    book: Hash;
+    chapters: Hash[];
 }>;
 export declare const writeBookFolders: (outputPath: string, bibleObj: BibleVersionContent, updateProgress?: ((progress: number, message: string) => void) | undefined) => Promise<{
     booksHashes: BooksHashes;

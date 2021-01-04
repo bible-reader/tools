@@ -26,7 +26,7 @@ describe("generate()", () => {
         return generate(outputPath, bibleObj);
       })
       .then((descriptorHash) => {
-        expect(descriptorHash).toBe("b29dce");
+        expect(descriptorHash).toBe("f91fc7");
         done();
       })
       .catch((err) => {

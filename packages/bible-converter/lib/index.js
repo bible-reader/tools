@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getParser = void 0;
 exports.getParser = (format) => {
     if (format) {
         const parser = require(`./parsers/${format}`).default;
@@ -8,7 +9,7 @@ exports.getParser = (format) => {
     throw new Error("No format string supplied.");
 };
 var main_1 = require("./main");
-exports.generate = main_1.generate;
+Object.defineProperty(exports, "generate", { enumerable: true, get: function () { return main_1.generate; } });
 var utils_1 = require("./utils");
-exports.getHash = utils_1.getHash;
+Object.defineProperty(exports, "getHash", { enumerable: true, get: function () { return utils_1.getHash; } });
 //# sourceMappingURL=index.js.map

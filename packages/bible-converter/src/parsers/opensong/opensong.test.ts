@@ -22,13 +22,17 @@ describe("OpenSong Bible format parser", () => {
 
         expect(Object.keys(books).length).toEqual(5);
 
-        expect(books.gen.chapters[0].verses[0]).toEqual(
+        expect(books.gen.chapters[0].fragments[0].t).toEqual(
           "In the beginning God created the heaven and the earth."
         );
 
-        expect(books.exo.chapters[19].verses[2]).toEqual(
+        expect(books.gen.chapters[0].fragments[0].v).toEqual(1);
+
+        expect(books.exo.chapters[19].fragments[2].t).toEqual(
           "Thou shalt have no other gods before me."
         );
+
+        expect(books.exo.chapters[19].fragments[2].v).toEqual(3);
 
         // Number of chapters in genesis
         expect(bibleObj.v11n.gen.length).toEqual(50);

@@ -1,5 +1,19 @@
+type NumberOfVerses = number;
+
+/**
+ * Versification lists number of verses per each chapter.
+ */
 export type Versification = {
-  [key: string]: number[];
+  [bookID: string]: NumberOfVerses[];
+};
+
+/**
+ * Fragments is one number for every chapter.
+ * It is a number of fragments (mostly verses or parts of verses)
+ * from the start of the current book up to the end of current chapter.
+ */
+export type FragmentNumbers = {
+  [bookID: string]: number[];
 };
 
 export interface Passage {
@@ -19,8 +33,13 @@ export interface ChapterReference {
   chapter: number;
 }
 
+export interface Fragment {
+  v: number; // verse number
+  t: string; // verse text
+}
+
 export interface Chapter extends ChapterReference {
-  verses: string[];
+  fragments: Fragment[];
   loading: boolean;
 }
 
@@ -29,7 +48,7 @@ export interface VerseReference extends ChapterReference {
 }
 
 export interface ChapterContent {
-  verses: string[];
+  fragments: Fragment[];
 }
 
 export interface Book {
@@ -45,6 +64,7 @@ export interface BibleVersion {
   name: string;
   lang: string;
   v11n: Versification;
+  fragmentNumbers: FragmentNumbers;
 }
 export interface BibleVersionContent extends BibleVersion {
   books: BibleBooks;
