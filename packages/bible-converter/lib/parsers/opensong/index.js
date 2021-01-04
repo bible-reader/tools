@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isVerse = exports.isChapter = exports.isBook = void 0;
 const parseFromXML = require("xml-parser");
 const common_1 = require("@bible-reader/common");
 const defaultBookLists_1 = require("./defaultBookLists");
@@ -23,16 +24,17 @@ const parse = (data, id, name, lang, updateProgress) => {
         name,
         lang,
         books: {},
-        v11n: {}
+        v11n: {},
+        fragmentNumbers: {}
     };
     let otIndex = 0;
     let ntIndex = 0;
     let otBooks;
     let ntBooks;
-    children.forEach(child => {
+    children.forEach((child) => {
         if (child.name === "OT") {
             otBooks = {};
-            child.children.forEach(item => {
+            child.children.forEach((item) => {
                 if (otIndex < NUM_BOOKS_OT && otBooks) {
                     otBooks[item.attributes.n] = otIndex;
                     otIndex++;
@@ -41,7 +43,7 @@ const parse = (data, id, name, lang, updateProgress) => {
         }
         if (child.name === "NT") {
             ntBooks = {};
-            child.children.forEach(item => {
+            child.children.forEach((item) => {
                 if (ntIndex < NUM_BOOKS_NT && ntBooks) {
                     ntBooks[item.attributes.n] = ntIndex;
                     ntIndex++;
@@ -58,23 +60,29 @@ const parse = (data, id, name, lang, updateProgress) => {
     const isInBookList = (book) => exports.isBook(otBooks, ntBooks, book);
     const books = children.filter(isInBookList);
     books.forEach((book, index) => {
-        bibleObj.books[common_1.booksOrder[index]] = {
+        const bookID = common_1.booksOrder[index];
+        bibleObj.books[bookID] = {
             chapters: []
         };
-        bibleObj.books[common_1.booksOrder[index]].chapters = book.children
+        bibleObj.books[bookID].chapters = book.children
             .filter(exports.isChapter)
-            .map(chapter => ({
-            verses: chapter.children
+            .map((chapter) => ({
+            fragments: chapter.children
                 .filter(exports.isVerse)
-                .map(verse => verse.content || "")
+                .map((verse, index) => ({ v: index + 1, t: verse.content || "" }))
         }));
         // V11n (versification): number of verses for each chapter
-        bibleObj.v11n[common_1.booksOrder[index]] = book.children
+        bibleObj.v11n[bookID] = book.children
             .filter(exports.isChapter)
-            .map(chapter => chapter.children.filter(exports.isVerse).length);
+            .map((chapter) => chapter.children.filter(exports.isVerse).length);
+        // Fragments - number of verses (or fragments of verses) up to the current chapter
+        bibleObj.fragmentNumbers[bookID] = bibleObj.v11n[bookID].reduce((previous, current, currentIndex) => [
+            ...previous,
+            currentIndex === 0 ? current : current + previous[currentIndex - 1]
+        ], []);
         if (updateProgress) {
             // progress is current book index / number of all books (66)
-            updateProgress((index + 1) / common_1.booksOrder.length, common_1.booksOrder[index]);
+            updateProgress((index + 1) / common_1.booksOrder.length, bookID);
         }
     });
     return bibleObj;
