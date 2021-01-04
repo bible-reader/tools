@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getNextChapter = exports.getPreviousChapter = exports.verseExists = exports.chapterExists = void 0;
 function chapterExists(v11n, book, chapter) {
     return v11n[book] ? (v11n[book][chapter - 1] ? true : false) : false;
 }

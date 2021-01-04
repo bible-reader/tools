@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.bookNumbers = exports.booksOrder = exports.oneChapterBooks = void 0;
 exports.oneChapterBooks = [31, 57, 63, 64, 65];
 exports.booksOrder = [
     "gen",

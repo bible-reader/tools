@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.generate = exports.toOneJSONFile = exports.splitByChapters = exports.writeBookFolders = exports.writeChapters = void 0;
 const fs_1 = require("fs");
 const utils_1 = require("./utils");
-exports.writeChapters = (bookPath, bookObj) => __awaiter(void 0, void 0, void 0, function* () {
+const writeChapters = (bookPath, bookObj) => __awaiter(void 0, void 0, void 0, function* () {
     let index = 0;
     const chaptersHashes = [];
     for (const chapter of bookObj.chapters) {
@@ -44,7 +44,8 @@ exports.writeChapters = (bookPath, bookObj) => __awaiter(void 0, void 0, void 0,
         chapters: chaptersHashes
     };
 });
-exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
+exports.writeChapters = writeChapters;
+const writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     const booksHashes = {};
     const chaptersHashes = {};
     const bookAliases = Object.keys(bibleObj.books);
@@ -76,7 +77,8 @@ exports.writeBookFolders = (outputPath, bibleObj, updateProgress) => __awaiter(v
         chaptersHashes
     };
 });
-exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
+exports.writeBookFolders = writeBookFolders;
+const splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     let hashes;
     let descriptorHash = "";
     try {
@@ -118,7 +120,8 @@ exports.splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(vo
     }
     return descriptorHash;
 });
-exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(void 0, void 0, void 0, function* () {
+exports.splitByChapters = splitByChapters;
+const toOneJSONFile = (outputPath, bibleObj) => __awaiter(void 0, void 0, void 0, function* () {
     const all = JSON.stringify(bibleObj);
     const hash = utils_1.getHash(all);
     try {
@@ -129,13 +132,15 @@ exports.toOneJSONFile = (outputPath, bibleObj) => __awaiter(void 0, void 0, void
         console.error("Error writing one complete JSON file: ", err);
     }
 });
-exports.generate = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
+exports.toOneJSONFile = toOneJSONFile;
+const generate = (outputPath, bibleObj, updateProgress) => __awaiter(void 0, void 0, void 0, function* () {
     if (updateProgress) {
         updateProgress(0, "Writing one JSON file");
     }
     yield exports.toOneJSONFile(outputPath, bibleObj);
     return exports.splitByChapters(outputPath, bibleObj, updateProgress);
 });
+exports.generate = generate;
 exports.default = {
     generate: exports.generate,
     toOneJSONFile: exports.toOneJSONFile,

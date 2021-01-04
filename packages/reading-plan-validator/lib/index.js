@@ -4,7 +4,7 @@ const v11n_utils_1 = require("@bible-reader/v11n-utils");
 function validateReadingPlan(passages, versification, checkContinuity = true) {
     const errors = [];
     let i = 0;
-    for (let passage of passages) {
+    for (const passage of passages) {
         const error = {
             passageIndex: i,
             isError: false,

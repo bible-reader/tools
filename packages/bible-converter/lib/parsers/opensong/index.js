@@ -6,13 +6,16 @@ const common_1 = require("@bible-reader/common");
 const defaultBookLists_1 = require("./defaultBookLists");
 const NUM_BOOKS_OT = 39;
 const NUM_BOOKS_NT = 27;
-exports.isBook = (otBooks, ntBooks, book) => book.name === "b" &&
+const isBook = (otBooks, ntBooks, book) => book.name === "b" &&
     otBooks &&
     ntBooks &&
     (otBooks[book.attributes.n] !== undefined ||
         ntBooks[book.attributes.n] !== undefined);
-exports.isChapter = (chapter) => chapter.name === "c";
-exports.isVerse = (verse) => verse.name === "v";
+exports.isBook = isBook;
+const isChapter = (chapter) => chapter.name === "c";
+exports.isChapter = isChapter;
+const isVerse = (verse) => verse.name === "v";
+exports.isVerse = isVerse;
 /**
  * param filePath {string} Path to file
  */
