@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/bible-converter",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Library to convert Bibles to JSON. Written in TypeScript.",
   "repository": {
     "type": "git",
