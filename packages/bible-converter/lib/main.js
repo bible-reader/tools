@@ -97,6 +97,7 @@ const splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(void
         // Write descriptor - the file of all hashes and v11n
         const descriptor = {
             v11n: bibleObj.v11n,
+            fragmentNumbers: bibleObj.fragmentNumbers,
             chapters: hashes.chaptersHashes,
             books: hashes.booksHashes
         };
@@ -117,6 +118,14 @@ const splitByChapters = (outputPath, bibleObj, updateProgress) => __awaiter(void
     }
     catch (err) {
         console.error("Error writing v11n file: ", err);
+    }
+    const fragmentNumbersPayload = JSON.stringify(bibleObj.fragmentNumbers);
+    const fragmentNumbersHash = utils_1.getHash(fragmentNumbersPayload);
+    try {
+        fs_1.promises.writeFile(`${outputPath}/fragmentNumbers.${fragmentNumbersHash}.json`, fragmentNumbersPayload);
+    }
+    catch (err) {
+        console.error("Error writing fragmentNumbers file: ", err);
     }
     return descriptorHash;
 });
