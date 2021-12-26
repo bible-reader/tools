@@ -1,6 +1,6 @@
 {
   "name": "@bible-reader/v11n-utils",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Utility library for working with v11n (versification) data object",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "author": "Pavel Struhar",
   "license": "MIT",
   "dependencies": {
-    "@bible-reader/types": "^3.0.0"
+    "@bible-reader/types": "^3.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
