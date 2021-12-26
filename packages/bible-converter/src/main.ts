@@ -1,9 +1,13 @@
 import { promises as fs } from "fs";
-import { pad, getHash } from "./utils";
-
 import { BibleVersionContent, Book } from "@bible-reader/types";
 
+import { pad, getHash } from "./utils";
+
 type Hash = string;
+
+function isError(error: any): error is NodeJS.ErrnoException {
+  return error instanceof Error;
+}
 
 export interface BooksHashes {
   [bookId: string]: Hash;
@@ -100,10 +104,12 @@ export const splitByChapters = async (
     await fs.mkdir(outputPath, { recursive: true });
     hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
   } catch (err) {
-    if (err.code === "EEXIST") {
-      hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
-    } else {
-      console.error("Error creating book folders: ", err);
+    if (isError(err) && err instanceof TypeError) {
+      if (err?.code === "EEXIST") {
+        hashes = await writeBookFolders(outputPath, bibleObj, updateProgress);
+      } else {
+        console.error("Error creating book folders: ", err);
+      }
     }
   }
   if (hashes) {

@@ -60,7 +60,7 @@ const parse = (data, id, name, lang, updateProgress) => {
     if (ntBooks === undefined) {
         ntBooks = defaultBookLists_1.defaultNTBooks;
     }
-    const isInBookList = (book) => exports.isBook(otBooks, ntBooks, book);
+    const isInBookList = (book) => (0, exports.isBook)(otBooks, ntBooks, book);
     const books = children.filter(isInBookList);
     books.forEach((book, index) => {
         const bookID = common_1.booksOrder[index];
