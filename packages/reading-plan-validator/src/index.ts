@@ -1,7 +1,7 @@
 import { Versification, Passage } from "@bible-reader/types";
 import { chapterExists, verseExists } from "@bible-reader/v11n-utils";
 
-type Error = {
+type RPValidationError = {
   passageIndex: number;
   isError: boolean;
   message: string;
@@ -12,12 +12,12 @@ function validateReadingPlan(
   versification: Versification,
   checkContinuity = true
 ) {
-  const errors: Array<Error> = [];
+  const errors: Array<RPValidationError> = [];
 
   let i = 0;
 
   for (const passage of passages) {
-    const error: Error = {
+    const error: RPValidationError = {
       passageIndex: i,
       isError: false,
       message: ""
@@ -94,7 +94,7 @@ function validateReadingPlan(
           if (
             passages[i - 1].endVerse <
             versification[passages[i - 1].bookNameShort][
-              passages[i - 1].endChapter - 1
+            passages[i - 1].endChapter - 1
             ]
           ) {
             error.isError = true;
@@ -110,7 +110,7 @@ function validateReadingPlan(
         if (
           passages[i - 1].endVerse <
           versification[passages[i - 1].bookNameShort][
-            passages[i - 1].endChapter - 1
+          passages[i - 1].endChapter - 1
           ]
         ) {
           error.isError = true;
